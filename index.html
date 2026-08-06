@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AusTech — Coming Soon</title>
-<meta name="description" content="AusTech is a web development company based in Grand Cayman. Our new site is on its way.">
+<meta name="description" content="AusTech is a web and software development company based in Grand Cayman.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,10 90,85 10,85' fill='%2308101c'/%3E%3Cpolygon points='50,45 68,85 32,85' fill='%2329d3f5'/%3E%3C/svg%3E">
 <style>
   :root{
@@ -13,7 +13,7 @@
     --cyan:#29d3f5;
     --cyan-dim:rgba(41,211,245,0.5);
     --ink:#eef4fa;
-    --ink-dim:rgba(238,244,250,0.62);
+    --ink-dim:rgba(238,244,250,0.6);
     --hair:rgba(238,244,250,0.1);
   }
 
@@ -36,15 +36,14 @@
     position:relative;
   }
 
-  /* ambient background */
   .glow{
     position:fixed;
     inset:0;
     z-index:0;
     pointer-events:none;
     background:
-      radial-gradient(48rem 32rem at 78% 8%, rgba(41,211,245,0.16), transparent 60%),
-      radial-gradient(40rem 30rem at 12% 92%, rgba(41,211,245,0.08), transparent 60%),
+      radial-gradient(42rem 28rem at 78% 6%, rgba(41,211,245,0.14), transparent 60%),
+      radial-gradient(34rem 26rem at 12% 94%, rgba(41,211,245,0.07), transparent 60%),
       linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
   }
 
@@ -67,53 +66,26 @@
     align-items:center;
     justify-content:center;
     text-align:center;
-    padding:8vh 6vw;
+    padding:6vh 6vw;
     min-height:100dvh;
   }
 
   .mark{
-    width:64px;
-    height:64px;
-    margin-bottom:2.75rem;
+    width:38px;
+    height:38px;
+    margin-bottom:1.6rem;
     opacity:0;
-    animation:fadeUp 900ms cubic-bezier(0.32,0.72,0,1) forwards;
-  }
-
-  .eyebrow{
-    display:inline-flex;
-    align-items:center;
-    gap:0.5rem;
-    padding:0.45rem 0.95rem;
-    border-radius:999px;
-    border:1px solid var(--hair);
-    background:rgba(238,244,250,0.03);
-    font-size:0.68rem;
-    letter-spacing:0.24em;
-    text-transform:uppercase;
-    color:var(--ink-dim);
-    margin-bottom:2rem;
-    opacity:0;
-    animation:fadeUp 900ms cubic-bezier(0.32,0.72,0,1) 120ms forwards;
-  }
-
-  .eyebrow .dot{
-    width:6px;
-    height:6px;
-    border-radius:50%;
-    background:var(--cyan);
-    box-shadow:0 0 10px 2px var(--cyan-dim);
-    animation:pulse 2.4s ease-in-out infinite;
+    animation:fadeUp 800ms cubic-bezier(0.32,0.72,0,1) forwards;
   }
 
   h1{
-    font-size:clamp(2.4rem, 7vw, 5rem);
-    line-height:1.02;
-    letter-spacing:-0.02em;
+    font-size:clamp(1.7rem, 4.4vw, 2.6rem);
+    line-height:1.08;
+    letter-spacing:-0.01em;
     font-weight:700;
-    margin:0 0 1.4rem;
-    max-width:18ch;
+    margin:0 0 0.9rem;
     opacity:0;
-    animation:fadeUp 900ms cubic-bezier(0.32,0.72,0,1) 220ms forwards;
+    animation:fadeUp 800ms cubic-bezier(0.32,0.72,0,1) 100ms forwards;
   }
 
   h1 span{
@@ -124,112 +96,150 @@
   }
 
   p.lede{
-    font-size:clamp(1rem, 1.6vw, 1.2rem);
+    font-size:clamp(0.85rem, 1.1vw, 0.95rem);
     line-height:1.6;
     color:var(--ink-dim);
-    max-width:38ch;
-    margin:0 0 3rem;
+    max-width:32ch;
+    margin:0 0 0.75rem;
     font-weight:400;
     opacity:0;
-    animation:fadeUp 900ms cubic-bezier(0.32,0.72,0,1) 320ms forwards;
+    animation:fadeUp 800ms cubic-bezier(0.32,0.72,0,1) 180ms forwards;
   }
 
-  .cta-row{
-    display:flex;
-    flex-wrap:wrap;
-    gap:0.85rem;
-    justify-content:center;
+  a.mailto-link{
+    display:inline-block;
+    font-size:0.82rem;
+    color:var(--cyan);
+    text-decoration:none;
+    margin-bottom:2rem;
+    border-bottom:1px solid var(--cyan-dim);
+    padding-bottom:1px;
     opacity:0;
-    animation:fadeUp 900ms cubic-bezier(0.32,0.72,0,1) 420ms forwards;
+    animation:fadeUp 800ms cubic-bezier(0.32,0.72,0,1) 240ms forwards;
+    transition:opacity 300ms ease;
   }
 
-  a.btn{
-    --pad:0.95rem 1.6rem;
+  a.mailto-link:hover{
+    opacity:0.8 !important;
+  }
+
+  .card{
+    width:100%;
+    max-width:360px;
+    padding:1.5rem;
+    border-radius:1.25rem;
+    background:rgba(238,244,250,0.03);
+    border:1px solid var(--hair);
+    box-shadow:inset 0 1px 1px rgba(255,255,255,0.04);
+    opacity:0;
+    animation:fadeUp 800ms cubic-bezier(0.32,0.72,0,1) 320ms forwards;
+  }
+
+  .card h2{
+    font-size:0.78rem;
+    font-weight:600;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    margin:0 0 1rem;
+    text-align:left;
+  }
+
+  form{
+    display:flex;
+    flex-direction:column;
+    gap:0.6rem;
+  }
+
+  .row{
+    display:flex;
+    gap:0.6rem;
+  }
+
+  input, textarea{
+    width:100%;
+    background:rgba(8,16,28,0.6);
+    border:1px solid var(--hair);
+    border-radius:0.7rem;
+    padding:0.6rem 0.8rem;
+    font-size:0.82rem;
+    font-family:inherit;
+    color:var(--ink);
+    outline:none;
+    transition:border-color 300ms ease, box-shadow 300ms ease;
+    resize:none;
+  }
+
+  input::placeholder, textarea::placeholder{
+    color:rgba(238,244,250,0.32);
+  }
+
+  input:focus, textarea:focus{
+    border-color:var(--cyan-dim);
+    box-shadow:0 0 0 3px rgba(41,211,245,0.12);
+  }
+
+  button.btn{
+    margin-top:0.2rem;
     display:inline-flex;
     align-items:center;
-    gap:0.7rem;
-    padding:var(--pad);
+    justify-content:center;
+    gap:0.55rem;
+    padding:0.68rem 1.1rem;
     border-radius:999px;
-    font-size:0.92rem;
+    font-size:0.82rem;
     font-weight:600;
-    text-decoration:none;
-    transition:transform 420ms cubic-bezier(0.32,0.72,0,1), box-shadow 420ms cubic-bezier(0.32,0.72,0,1), background 420ms cubic-bezier(0.32,0.72,0,1);
-  }
-
-  a.btn.primary{
+    font-family:inherit;
+    border:none;
+    cursor:pointer;
     background:var(--cyan);
     color:#04141c;
+    transition:transform 380ms cubic-bezier(0.32,0.72,0,1), box-shadow 380ms cubic-bezier(0.32,0.72,0,1), opacity 300ms ease;
   }
 
-  a.btn.primary:hover{
-    transform:translateY(-2px) scale(1.015);
-    box-shadow:0 12px 32px -8px rgba(41,211,245,0.55);
+  button.btn:hover:not(:disabled){
+    transform:translateY(-1px);
+    box-shadow:0 10px 26px -8px rgba(41,211,245,0.5);
   }
 
-  a.btn.primary:active{
+  button.btn:active:not(:disabled){
     transform:scale(0.98);
   }
 
-  a.btn.ghost{
-    background:rgba(238,244,250,0.04);
-    color:var(--ink);
-    border:1px solid var(--hair);
+  button.btn:disabled{
+    opacity:0.6;
+    cursor:default;
   }
 
-  a.btn.ghost:hover{
-    background:rgba(238,244,250,0.08);
-    transform:translateY(-2px);
+  .form-note{
+    min-height:1.1rem;
+    font-size:0.76rem;
+    margin:0.15rem 0 0;
+    text-align:left;
+    color:var(--ink-dim);
   }
 
-  a.btn .icon{
-    width:26px;
-    height:26px;
-    border-radius:50%;
-    background:rgba(4,20,28,0.14);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    transition:transform 420ms cubic-bezier(0.32,0.72,0,1);
-  }
-
-  a.btn.ghost .icon{
-    background:rgba(238,244,250,0.08);
-  }
-
-  a.btn:hover .icon{
-    transform:translate(2px,-1px) scale(1.06);
-  }
+  .form-note.ok{ color:var(--cyan); }
+  .form-note.err{ color:#f5a3a3; }
 
   footer{
     position:relative;
     z-index:2;
     text-align:center;
-    padding:2.2rem 6vw 2.6rem;
-    font-size:0.78rem;
+    padding:1.5rem 6vw 1.8rem;
+    font-size:0.72rem;
     letter-spacing:0.02em;
-    color:rgba(238,244,250,0.4);
+    color:rgba(238,244,250,0.36);
     border-top:1px solid var(--hair);
   }
 
-  footer .loc{
-    display:inline-flex;
-    align-items:center;
-    gap:0.4rem;
-  }
-
   @keyframes fadeUp{
-    from{opacity:0; transform:translateY(18px);}
+    from{opacity:0; transform:translateY(16px);}
     to{opacity:1; transform:translateY(0);}
   }
 
-  @keyframes pulse{
-    0%,100%{opacity:1;}
-    50%{opacity:0.35;}
-  }
-
-  @media (max-width:480px){
-    .cta-row{flex-direction:column; width:100%;}
-    a.btn{justify-content:center; width:100%;}
+  @media (max-width:420px){
+    .row{flex-direction:column;}
   }
 </style>
 </head>
@@ -244,30 +254,65 @@
       <polygon points="50,46 69,86 31,86" fill="#29d3f5"/>
     </svg>
 
-    <span class="eyebrow"><span class="dot"></span>Launching soon</span>
+    <h1><span>Coming Soon</span></h1>
 
-    <h1>Our new site is <span>almost here</span></h1>
+    <p class="lede">We're a web and software development company based in Grand Cayman, building solutions for the needs of Caribbean businesses.</p>
 
-    <p class="lede">AusTech is a Grand Cayman-based web development studio. We're putting the finishing touches on our home — in the meantime, reach out and let's talk about your project.</p>
+    <a class="mailto-link" href="mailto:info@austech.ky">info@austech.ky</a>
 
-    <div class="cta-row">
-      <a class="btn primary" href="mailto:hello@austech.ky">
-        Get in touch
-        <span class="icon">↗</span>
-      </a>
-      <a class="btn ghost" href="mailto:hello@austech.ky">
-        hello@austech.ky
-        <span class="icon">✉</span>
-      </a>
+    <div class="card">
+      <h2>Send us a message</h2>
+      <form id="contact-form">
+        <div class="row">
+          <input type="text" name="name" placeholder="Name" required>
+          <input type="email" name="email" placeholder="Email" required>
+        </div>
+        <textarea name="message" rows="3" placeholder="Tell us about your project" required></textarea>
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+        <button type="submit" class="btn">Send message</button>
+        <p class="form-note" id="form-note"></p>
+      </form>
     </div>
   </main>
 
   <footer>
-    <span class="loc">AusTech &nbsp;·&nbsp; Grand Cayman, Cayman Islands &nbsp;·&nbsp; © <span id="yr"></span></span>
+    AusTech &nbsp;·&nbsp; Grand Cayman, Cayman Islands &nbsp;·&nbsp; © <span id="yr"></span>
   </footer>
 
   <script>
     document.getElementById('yr').textContent = new Date().getFullYear();
+
+    const form = document.getElementById('contact-form');
+    const note = document.getElementById('form-note');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      note.className = 'form-note';
+      note.textContent = '';
+
+      try {
+        const data = Object.fromEntries(new FormData(form));
+        data._subject = 'New message from austech.ky';
+        const res = await fetch('https://formsubmit.co/ajax/info@austech.ky', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (!res.ok) throw new Error('request failed');
+        form.reset();
+        note.textContent = "Thanks — we'll get back to you shortly.";
+        note.className = 'form-note ok';
+      } catch (err) {
+        note.textContent = 'Something went wrong — email us directly at info@austech.ky';
+        note.className = 'form-note err';
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Send message';
+      }
+    });
   </script>
 </body>
 </html>
