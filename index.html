@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AusTech — Coming Soon</title>
 <meta name="description" content="AusTech is a web and software development company based in Grand Cayman.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M50,17 L86,78 L14,78 Z M50,29 L70,78 L30,78 Z' fill='%2308101c'/%3E%3Cpolygon points='50,53 59,78 41,78' fill='%2329d3f5'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="icon.png">
 <style>
   :root{
     --navy:#08101c;
@@ -71,41 +71,11 @@
   }
 
   .logo{
-    display:inline-flex;
-    align-items:center;
-    gap:0.16em;
-    font-size:clamp(2.4rem, 7vw, 4rem);
+    width:clamp(240px, 42vw, 420px);
+    height:auto;
     margin-bottom:2rem;
     opacity:0;
     animation:fadeUp 800ms cubic-bezier(0.32,0.72,0,1) forwards;
-  }
-
-  .logo svg{
-    width:0.62em;
-    height:0.62em;
-    flex-shrink:0;
-  }
-
-  .logo .word{
-    display:inline-flex;
-    align-items:baseline;
-    line-height:1;
-    letter-spacing:-0.01em;
-  }
-
-  .logo .us{
-    color:var(--ink);
-    font-weight:800;
-  }
-
-  .logo .tech{
-    color:var(--cyan);
-    font-weight:300;
-  }
-
-  .logo .tech .e{
-    font-size:0.68em;
-    text-transform:lowercase;
   }
 
   h1{
@@ -279,13 +249,7 @@
   <div class="grain"></div>
 
   <main>
-    <div class="logo">
-      <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M50,17 L86,78 L14,78 Z M50,29 L70,78 L30,78 Z" fill="#eef4fa"/>
-        <polygon points="50,53 59,78 41,78" fill="#29d3f5"/>
-      </svg>
-      <span class="word"><span class="us">US</span><span class="tech">T<span class="e">e</span>CH</span></span>
-    </div>
+    <img class="logo" src="Austech.png" alt="AusTech">
 
     <h1><span>Coming Soon</span></h1>
 
