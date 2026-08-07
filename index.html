@@ -288,7 +288,8 @@
           <input type="email" name="email" placeholder="Email" required>
         </div>
         <textarea name="message" rows="3" placeholder="Tell us about your project" required></textarea>
-        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+        <input type="hidden" name="access_key" value="3c986fc6-ed13-42ff-a182-4026a720a4ad">
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
         <button type="submit" class="btn">Send message</button>
         <p class="form-note" id="form-note"></p>
       </form>
@@ -331,13 +332,14 @@
 
       try {
         const data = Object.fromEntries(new FormData(form));
-        data._subject = 'New message from austech.ky';
-        const res = await fetch('https://formsubmit.co/ajax/info@austech.ky', {
+        data.subject = 'New message from austech.ky';
+        const res = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify(data)
         });
-        if (!res.ok) throw new Error('request failed');
+        const result = await res.json();
+        if (!res.ok || !result.success) throw new Error('request failed');
         form.reset();
         note.textContent = "Thanks — we'll get back to you shortly.";
         note.className = 'form-note ok';
