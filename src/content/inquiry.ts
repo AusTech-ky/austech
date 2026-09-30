@@ -6,7 +6,7 @@ export const inquiryOptions = {
     { value: "website", label: "Website" },
     { value: "automation", label: "Automation or integration" },
     { value: "product", label: "One of your products" },
-    { value: "other", label: "Something else" },
+    { value: "other", label: "Other" },
   ],
   // Ranges are for scoping conversations only; they are not prices.
   budgets: [

@@ -3,12 +3,13 @@ import { site } from "@/content/site";
 import { getProducts, getServices } from "@/lib/content";
 import { Container } from "@/components/ui/layout";
 import { Logo } from "./logo";
+import { CookieSettingsLink } from "./cookie-banner";
 
 export async function Footer() {
   const [services, products] = await Promise.all([getServices(), getProducts()]);
   const year = new Date().getFullYear();
 
-  const columns = [
+  const columns: { title: string; links: { label: string; href: string; soon?: boolean }[] }[] = [
     {
       title: "Services",
       links: services.map((s) => ({ label: s.title, href: `/services#${s.key}` })),
@@ -16,7 +17,8 @@ export async function Footer() {
     {
       title: "Products",
       links: products.map((p) => ({
-        label: p.status === "coming-soon" ? `${p.name} (soon)` : p.name,
+        label: p.name,
+        soon: p.status === "coming-soon",
         href: `/products#${p.slug}`,
       })),
     },
@@ -43,6 +45,12 @@ export async function Footer() {
             >
               {site.email}
             </a>
+            <a
+              href={site.phone.href}
+              className="mt-2 block text-[0.95rem] text-ink-2 transition-colors hover:text-ink"
+            >
+              {site.phone.display}
+            </a>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
             {columns.map((col) => (
@@ -51,8 +59,11 @@ export async function Footer() {
                 <ul className="mt-4 space-y-2.5">
                   {col.links.map((l) => (
                     <li key={l.href}>
-                      <Link href={l.href} className="text-[0.9rem] text-ink-2 transition-colors hover:text-ink">
+                      <Link href={l.href} className="inline-flex items-center gap-2 text-[0.9rem] text-ink-2 transition-colors hover:text-ink">
                         {l.label}
+                        {l.soon && (
+                          <span className="rounded-full bg-accent-soft px-1.5 py-px text-[0.65rem] font-medium text-navy">Soon</span>
+                        )}
                       </Link>
                     </li>
                   ))}
@@ -64,6 +75,12 @@ export async function Footer() {
         <div className="mt-16 flex flex-col gap-3 border-t border-line pt-6 text-[0.8rem] text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {year} {site.legalName} · {site.location.region}, {site.location.country}
+            <span className="mx-2 text-line-strong">|</span>
+            <Link href="/privacy" className="transition-colors hover:text-ink">Privacy</Link>
+            <span className="mx-2 text-line-strong">·</span>
+            <Link href="/cookies" className="transition-colors hover:text-ink">Cookies</Link>
+            <span className="mx-2 text-line-strong">·</span>
+            <CookieSettingsLink className="transition-colors hover:text-ink" />
           </p>
           <p className="flex items-center gap-2">
             <span className="relative flex size-1.5">

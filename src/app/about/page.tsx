@@ -35,8 +35,8 @@ const principles = [
     body: "Sometimes the right answer is an off-the-shelf tool, or a smaller first step. We'll tell you, even when it means less work for us.",
   },
   {
-    title: "You own it",
-    body: "Bespoke work belongs to you: the code, the data and the freedom to take it anywhere.",
+    title: "With you after launch",
+    body: "We host, support and keep improving what we build, so your software keeps pace with the business long after go-live.",
   },
 ];
 
@@ -46,10 +46,9 @@ export default async function AboutPage() {
   return (
     <>
       <PageHeader
-        eyebrow="About"
         title={
           <>
-            Technology should make business <span className="accent-serif text-accent">simpler.</span>
+            Technology should make business <span className="accent-serif">simpler.</span>
           </>
         }
       />
@@ -57,7 +56,7 @@ export default async function AboutPage() {
       <section className="border-t border-line py-16 sm:py-24">
         <Container className="grid gap-10 lg:grid-cols-12 lg:gap-12">
           <Reveal className="lg:col-span-4">
-            <p className="eyebrow">Our view</p>
+            <h2 className="text-h3 font-semibold text-ink">Our view</h2>
           </Reveal>
           <div className="space-y-6 text-[clamp(1.15rem,1.05rem+0.4vw,1.4rem)] leading-[1.6] tracking-[-0.01em] text-ink-2 lg:col-span-8">
             <Reveal as="div">
@@ -85,7 +84,7 @@ export default async function AboutPage() {
 
       <Section tone="canvas">
         <Container>
-          <SectionHeader eyebrow="Principles" title="What we hold ourselves to" />
+          <SectionHeader title="What we hold ourselves to" />
           <div className="mt-14 grid gap-px overflow-hidden rounded-card bg-line ring-1 ring-line sm:grid-cols-2 lg:grid-cols-3">
             {principles.map((p, i) => (
               <Reveal key={p.title} delay={(i % 3) * 70} className="bg-paper p-7 sm:p-8">
@@ -101,8 +100,7 @@ export default async function AboutPage() {
       <section className="py-20 sm:py-28">
         <Container className="grid gap-10 lg:grid-cols-12 lg:gap-12">
           <Reveal className="lg:col-span-5">
-            <p className="eyebrow">Where we are</p>
-            <h2 className="mt-4 text-h2 font-semibold text-ink">
+            <h2 className="text-h2 font-semibold text-ink">
               Local to Cayman. <span className="accent-serif">Built to world standards.</span>
             </h2>
           </Reveal>

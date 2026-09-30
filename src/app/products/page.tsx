@@ -15,7 +15,7 @@ import { Reveal } from "@/components/ui/reveal";
 export const metadata: Metadata = {
   title: "Products",
   description:
-    "Software products from Austech: a shared WhatsApp team inbox, a fuel credit customer platform, and property management and HR platforms coming soon.",
+    "Software products from Austech: a shared WhatsApp team inbox, a fuel management platform for station networks, and property management and HR platforms coming soon.",
   alternates: { canonical: "/products" },
 };
 
@@ -43,6 +43,9 @@ function ProductSection({ product, index }: { product: Product; index: number })
           <Reveal delay={80} className="lg:col-span-6 lg:col-start-7 lg:pt-2">
             <p className="text-[1.05rem] leading-relaxed text-muted">{product.description}</p>
             <p className="mt-4 text-[0.9rem] font-medium text-ink">{product.audience}</p>
+            {product.international && (
+              <p className="mt-1 text-[0.85rem] text-muted">(Available for companies outside the Cayman Islands too.)</p>
+            )}
             <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
               {soon ? (
                 <Button href={`/contact?project=${product.slug}`} arrow>
@@ -97,10 +100,9 @@ export default async function ProductsPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Products"
         title={
           <>
-            Our own software, <span className="accent-serif text-accent">ready to use</span>
+            Our own software, <span className="accent-serif">ready to use</span>
           </>
         }
         lead="Some problems come up for business after business. We turn our best solutions into focused products, built with the same care as our bespoke work and shaped by the people who use them."
@@ -114,7 +116,9 @@ export default async function ProductsPage() {
             >
               <span className={cn("size-1.5 rounded-full", accentClasses[p.accent].dot)} />
               {p.name}
-              {p.status === "coming-soon" && <span className="text-[0.75rem] text-faint">Soon</span>}
+              {p.status === "coming-soon" && (
+                <span className="rounded-full bg-accent-soft px-1.5 py-px text-[0.65rem] font-medium text-navy">Soon</span>
+              )}
             </Link>
           ))}
         </nav>

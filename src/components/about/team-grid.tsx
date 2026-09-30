@@ -9,7 +9,7 @@ export function TeamGrid({ team }: { team: TeamMember[] }) {
   return (
     <Section>
       <Container>
-        <SectionHeader eyebrow="Team" title="The people you'll work with" />
+        <SectionHeader title="The people you'll work with" />
         <ul className="mt-14 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
           {team.map((m, i) => (
             <Reveal as="li" key={m.name} delay={(i % 4) * 60}>

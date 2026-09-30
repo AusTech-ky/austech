@@ -8,6 +8,7 @@ const tints: Record<Accent, string> = {
   relay: "from-[#e3f4ec] via-[#eff7f3] to-[#f6f6f4]",
   property: "from-[#eeebfc] via-[#f4f2fb] to-[#f6f6f4]",
   people: "from-[#fbe9e6] via-[#faf2f0] to-[#f6f6f4]",
+  sea: "from-[#e0f1ee] via-[#edf6f4] to-[#f6f6f4]",
   accent: "from-[#e9eefc] via-[#f2f4fb] to-[#f6f6f4]",
 };
 
@@ -38,10 +39,10 @@ export function Stage({
       )}
     >
       <div className="bg-grid pointer-events-none absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)]" />
-      <div className={cn("relative", phone && "pr-[14%] sm:pr-[16%]")}>
+      <div className={cn("relative", phone && "pr-[12%] sm:pr-[13%]")}>
         <Mockup view={main} className={cn(!compact && "rounded-b-none!")} />
         {phone && (
-          <div className="absolute bottom-[-4%] right-0 w-[26%] sm:bottom-[-6%]">
+          <div className="absolute bottom-[-4%] right-0 w-[22%] sm:bottom-[-6%]">
             <Mockup view={phone} />
           </div>
         )}

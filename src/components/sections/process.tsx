@@ -6,7 +6,6 @@ export function Process({ steps, tone = "paper" }: { steps: { title: string; des
     <Section tone={tone}>
       <Container>
         <SectionHeader
-          eyebrow="How we work"
           title={
             <>
               Clear steps. <span className="accent-serif">No black boxes.</span>

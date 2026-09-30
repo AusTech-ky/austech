@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Service } from "@/content/types";
 import { Container, Section, SectionHeader } from "@/components/ui/layout";
 import { Reveal } from "@/components/ui/reveal";
+import { ClientLogos } from "./client-logos";
 import { cn } from "@/lib/cn";
 
 export const serviceIcons = {
@@ -127,7 +128,6 @@ export function Capabilities({ services }: { services: Service[] }) {
     <Section>
       <Container>
         <SectionHeader
-          eyebrow="What we build"
           title={
             <>
               Software shaped around <span className="accent-serif">how you work</span>
@@ -147,26 +147,31 @@ export function Capabilities({ services }: { services: Service[] }) {
                 delay={i * 60}
                 className={cn(wide ? "lg:col-span-3" : "lg:col-span-2", i === 4 && "sm:col-span-2 lg:col-span-2")}
               >
-                <Link
-                  href={`/services#${s.key}`}
-                  className="group flex h-full flex-col rounded-card bg-canvas p-6 ring-1 ring-inset ring-transparent transition-all duration-500 ease-[var(--ease-out-soft)] hover:bg-white hover:shadow-lift hover:ring-line sm:p-7"
+                {/* The whole card links via the heading's stretched link, so the logos can be links of their own. */}
+                <div
+                  className="group relative flex h-full flex-col rounded-card bg-canvas p-6 ring-1 ring-inset ring-transparent transition-all duration-500 ease-[var(--ease-out-soft)] hover:bg-white hover:shadow-lift hover:ring-line sm:p-7"
                 >
-                  <div className="flex items-center justify-between">
-                    <span className="grid size-10 place-items-center rounded-xl bg-white text-ink shadow-soft ring-1 ring-line transition-colors group-hover:text-accent">
-                      <Icon className="size-[18px]" strokeWidth={1.8} />
-                    </span>
-                    <ArrowRight className="size-4 -translate-x-1 text-faint opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:text-ink group-hover:opacity-100" />
-                  </div>
-                  <div className={cn("mt-8 flex-1", wide ? "lg:grid lg:grid-cols-[1fr_minmax(0,240px)] lg:gap-8" : "")}>
+                  <div className={cn("flex-1", wide ? "lg:grid lg:grid-cols-[1fr_minmax(0,240px)] lg:gap-8" : "")}>
                     <div>
-                      <h3 className="text-h3 font-semibold text-ink">{s.title}</h3>
-                      <p className="mt-2.5 text-[0.95rem] leading-relaxed text-muted">{s.short}</p>
+                      <div className="flex items-center gap-3">
+                        <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-accent-soft text-navy ring-1 ring-inset ring-navy/10 transition-colors group-hover:bg-navy group-hover:text-white">
+                          <Icon className="size-[18px]" strokeWidth={1.8} />
+                        </span>
+                        <h3 className="text-h3 font-semibold text-ink">
+                          <Link href={`/services#${s.key}`} className="after:absolute after:inset-0 after:rounded-card">
+                            {s.title}
+                          </Link>
+                        </h3>
+                        <ArrowRight className="ml-auto size-4 shrink-0 -translate-x-1 text-faint opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:text-ink group-hover:opacity-100" />
+                      </div>
+                      <p className="mt-4 text-[0.95rem] leading-relaxed text-muted">{s.short}</p>
                     </div>
                     <div className={cn("mt-7", wide && "lg:mt-0 lg:self-end")}>
                       <Glyph />
                     </div>
                   </div>
-                </Link>
+                  <ClientLogos service={s.key} className="mt-6 border-t border-line pt-5" />
+                </div>
               </Reveal>
             );
           })}

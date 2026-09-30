@@ -21,7 +21,7 @@ export function CtaBand({
           <div className="relative overflow-hidden rounded-[1.75rem] bg-ink px-6 py-16 text-center sm:px-12 sm:py-24">
             <div
               aria-hidden
-              className="pointer-events-none absolute -top-40 left-1/2 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(125_152_240/0.28),transparent)]"
+              className="pointer-events-none absolute -top-40 left-1/2 h-[420px] w-[820px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(96_165_250/0.28),transparent)]"
             />
             <div
               aria-hidden

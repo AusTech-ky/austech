@@ -42,19 +42,19 @@ function Money({ value, size = 32 }: { value: string; size?: number }) {
 // ─── Customer dashboard ─────────────────────────────────────────
 
 const fills = [
-  { when: "Today, 08:14", driver: "Marcus Ebanks", vehicle: "Hilux · KY-4821", station: "Walkers Road", gal: "18.4", amt: "96.20" },
-  { when: "Today, 07:52", driver: "Keisha Bodden", vehicle: "Transit · KY-2290", station: "West Bay", gal: "22.1", amt: "118.40" },
-  { when: "Yesterday, 17:30", driver: "Andre Powell", vehicle: "Ranger · KY-7713", station: "Savannah", gal: "15.0", amt: "78.45" },
-  { when: "Yesterday, 12:06", driver: "Marcus Ebanks", vehicle: "Hilux · KY-4821", station: "Bodden Town", gal: "9.8", amt: "51.25" },
-  { when: "23 Sep, 16:41", driver: "Leon Scott", vehicle: "Transit · KY-3056", station: "Walkers Road", gal: "20.6", amt: "107.70" },
-  { when: "23 Sep, 09:18", driver: "Keisha Bodden", vehicle: "Transit · KY-2290", station: "George Town", gal: "17.2", amt: "89.95" },
+  { when: "Today, 08:14", driver: "Marcus Ebanks", vehicle: "Hilux · 148210", station: "Walkers Road", gal: "18.4", amt: "96.20" },
+  { when: "Today, 07:52", driver: "Keisha Bodden", vehicle: "Transit · C22904", station: "West Bay", gal: "22.1", amt: "118.40" },
+  { when: "Yesterday, 17:30", driver: "Andre Powell", vehicle: "Ranger · 77130", station: "Savannah", gal: "15.0", amt: "78.45" },
+  { when: "Yesterday, 12:06", driver: "Marcus Ebanks", vehicle: "Hilux · 148210", station: "Bodden Town", gal: "9.8", amt: "51.25" },
+  { when: "23 Sep, 16:41", driver: "Leon Scott", vehicle: "Transit · E30561", station: "Walkers Road", gal: "20.6", amt: "107.70" },
+  { when: "23 Sep, 09:18", driver: "Keisha Bodden", vehicle: "Transit · C22904", station: "George Town", gal: "17.2", amt: "89.95" },
 ];
 
 const drivers = [
-  { name: "Marcus Ebanks", vehicle: "Hilux · KY-4821", used: 612, limit: 800 },
-  { name: "Keisha Bodden", vehicle: "Transit · KY-2290", used: 734, limit: 800 },
-  { name: "Andre Powell", vehicle: "Ranger · KY-7713", used: 298, limit: 600 },
-  { name: "Leon Scott", vehicle: "Transit · KY-3056", used: 455, limit: 800 },
+  { name: "Marcus Ebanks", vehicle: "Hilux · 148210", used: 612, limit: 800 },
+  { name: "Keisha Bodden", vehicle: "Transit · C22904", used: 734, limit: 800 },
+  { name: "Andre Powell", vehicle: "Ranger · 77130", used: 298, limit: 600 },
+  { name: "Leon Scott", vehicle: "Transit · E30561", used: 455, limit: 800 },
 ];
 
 export function FuelUpDashboard() {
@@ -70,17 +70,17 @@ export function FuelUpDashboard() {
           { label: "Transactions", icon: Receipt },
           { label: "Drivers", icon: Users, count: "4" },
           { label: "Vehicles", icon: Car, count: "4" },
-          { label: "Top up", icon: Wallet },
+          { label: "Invoices", icon: Wallet },
           { label: "Statements", icon: FileText },
           { label: "Settings", icon: Settings },
         ]}
         footer={
           <div className="rounded-[10px] border border-[#ececea] bg-white p-3">
             <div className="flex items-center gap-2 text-[12px] font-medium text-ink">
-              <ShieldCheck className="size-3.5" style={{ color: AMBER }} /> Auto top-up on
+              <ShieldCheck className="size-3.5" style={{ color: AMBER }} /> Credit alerts on
             </div>
             <p className="mt-1 text-[11px] leading-[1.45] text-muted">
-              Adds CI$2,500 when available credit drops below CI$1,000.
+              Emails you when 80% of your credit limit is used.
             </p>
           </div>
         }
@@ -93,7 +93,7 @@ export function FuelUpDashboard() {
             <>
               <MButton icon={Download}>Statement</MButton>
               <MButton variant="primary" color={AMBER} icon={Plus}>
-                Top up
+                Pay invoice
               </MButton>
             </>
           }
@@ -230,9 +230,9 @@ export function FuelUpDashboard() {
                       </div>
                       <p className="nums text-[11.5px] text-muted">
                         <span className={near ? "font-semibold text-[#c7820e]" : "font-medium text-ink"}>
-                          ${d.used}
+                          CI${d.used}
                         </span>{" "}
-                        / {d.limit}
+                        / CI${d.limit}
                       </p>
                     </div>
                     <div className="mt-2 pl-[36px]">
@@ -281,7 +281,7 @@ export function FuelUpAdmin() {
           { label: "Dashboard", icon: LayoutGrid },
           { label: "Accounts", icon: Users, active: true, count: "248" },
           { label: "Transactions", icon: Receipt },
-          { label: "Top-ups", icon: Wallet, count: "14" },
+          { label: "Invoices", icon: Wallet, count: "14" },
           { label: "Statements", icon: FileText },
           { label: "Stations", icon: MapPin, count: "6" },
           { label: "Reports", icon: BarChart3 },
@@ -314,7 +314,7 @@ export function FuelUpAdmin() {
         <div className="mt-5 grid grid-cols-4 gap-3">
           {[
             { k: "Outstanding credit", v: "CI$184,220", s: "across 231 active accounts", c: "#0d1014" },
-            { k: "Top-ups today", v: "14", s: "CI$6,840 received", c: "#0d1014" },
+            { k: "Payments today", v: "14", s: "CI$6,840 received", c: "#0d1014" },
             { k: "Near limit", v: "12", s: "over 85% of credit used", c: "#a86a06" },
             { k: "Overdue", v: "3", s: "statements past due", c: "#c23a31" },
           ].map((m) => (
@@ -452,7 +452,7 @@ export function FuelUpMobile() {
 
       <div className="mt-5 grid grid-cols-4 gap-2 px-4">
         {[
-          { l: "Top up", i: Plus, primary: true },
+          { l: "Pay", i: Plus, primary: true },
           { l: "Statement", i: FileText },
           { l: "Drivers", i: Users },
           { l: "Vehicles", i: Car },

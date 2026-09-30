@@ -9,7 +9,7 @@ import { Reveal } from "@/components/ui/reveal";
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Case studies of software we've designed and built: fuel credit platforms, live vehicle tracking and shared WhatsApp inboxes for businesses in the Cayman Islands.",
+    "Case studies of software we've designed and built: fuel management platforms, incoming-stock and warehouse systems, live vehicle tracking and shared WhatsApp inboxes for businesses in the Cayman Islands.",
   alternates: { canonical: "/work" },
 };
 
@@ -20,10 +20,9 @@ export default async function WorkPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Work"
         title={
           <>
-            Software in production, <span className="accent-serif text-accent">doing real work</span>
+            Software in production, <span className="accent-serif">doing real work</span>
           </>
         }
         lead="A selection of platforms we've designed and built. Each one started with a business problem, not a feature list."

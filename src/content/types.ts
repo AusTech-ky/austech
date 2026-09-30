@@ -9,20 +9,39 @@
  */
 
 /** Product accent palette. Maps to --color-{accent} tokens in globals.css. */
-export type Accent = "fuel" | "swift" | "relay" | "property" | "people" | "accent";
+export type Accent = "fuel" | "swift" | "relay" | "property" | "people" | "sea" | "accent";
 
 /** Keys for the coded product UI mockups in `components/mockups`. */
 export type MockupKey = "fuelup" | "swift" | "relay" | "property" | "people";
 
-/** A single screen of a product, rendered as a coded mockup. */
-export type MockupView = {
-  product: MockupKey;
-  /** Which screen of that product to show. Each mockup defines its own views. */
-  view: string;
-  /** Device frame. */
-  frame: "browser" | "phone";
-  caption?: string;
-};
+/**
+ * A single screen shown in a device frame: either a coded product mockup,
+ * or a real screenshot (1200×740 for browser, 1180×820 for tablet, 366×776 for phone).
+ */
+export type MockupView =
+  | {
+      product: MockupKey;
+      /** Which screen of that product to show. Each mockup defines its own views. */
+      view: string;
+      /** Device frame. */
+      frame: "browser" | "phone";
+      /** Short heading shown beside the screen in a case study gallery. */
+      title?: string;
+      caption?: string;
+    }
+  | {
+      /** Path under /public. */
+      screenshot: string;
+      alt: string;
+      /** Shown in the browser frame's address bar. */
+      address?: string;
+      frame: "browser" | "tablet" | "phone";
+      /** A phone shot shown overlapping this one in a case study gallery, e.g. the same screen on mobile. */
+      companion?: MockupView;
+      /** Short heading shown beside the screen in a case study gallery. */
+      title?: string;
+      caption?: string;
+    };
 
 export type ServiceKey =
   | "websites"
@@ -47,6 +66,8 @@ export type Project = {
   slug: string;
   name: string;
   client: string;
+  /** True when `client` is a real company name we can show. Otherwise only the sector is shown. */
+  clientNamed?: boolean;
   /** Short line shown on cards. */
   tagline: string;
   summary: string;
@@ -54,26 +75,28 @@ export type Project = {
   services: ServiceKey[];
   platforms: string[];
   accent: Accent;
-  status: "live" | "in-development";
+  /** "coming-soon" shows the project as a teaser: no write-up, no case study page. */
+  status: "live" | "in-development" | "coming-soon";
   /** Ordering + whether the project appears on the home page. */
   featured: boolean;
   order: number;
   /** Hero mockup for cards and the top of the case study. */
   hero: MockupView;
-  challenge: {
+  /** Case study chapters. Required for a case study page; coming-soon projects can omit them. */
+  challenge?: {
     intro: string;
     points: string[];
   };
-  approach: {
+  approach?: {
     intro: string;
     steps: { title: string; description: string }[];
   };
-  solution: {
+  solution?: {
     intro: string;
     features: { title: string; description: string }[];
   };
   gallery: MockupView[];
-  impact: {
+  impact?: {
     intro: string;
     items: ImpactItem[];
   };
@@ -128,6 +151,8 @@ export type Product = {
   pricing: Pricing;
   /** Case study slug if this product has one. */
   caseStudySlug?: string;
+  /** Also sold to companies outside the Cayman Islands. */
+  international?: boolean;
 };
 
 // ─── Services ────────────────────────────────────────────────────

@@ -9,7 +9,8 @@ export const site = {
   description:
     "Austech is a Cayman Islands software company. We design and build bespoke software, business applications and modern websites that help growing businesses run simpler, serve customers better and see what's happening.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://austech.ky", // PLACEHOLDER domain
-  email: "hello@austech.ky", // PLACEHOLDER
+  email: "info@austech.ky",
+  phone: { display: "+1 (345) 938-5868", href: "tel:+13459385868" },
   location: {
     city: "George Town",
     region: "Grand Cayman",

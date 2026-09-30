@@ -13,5 +13,6 @@ export const accentClasses: Record<
   relay: { text: "text-relay", bg: "bg-relay", soft: "bg-relay-soft", dot: "bg-relay", hex: "#0f9f6e" },
   property: { text: "text-property", bg: "bg-property", soft: "bg-property-soft", dot: "bg-property", hex: "#6d5ae6" },
   people: { text: "text-people", bg: "bg-people", soft: "bg-people-soft", dot: "bg-people", hex: "#df5a47" },
-  accent: { text: "text-accent", bg: "bg-accent", soft: "bg-accent-soft", dot: "bg-accent", hex: "#2f55d4" },
+  sea: { text: "text-sea", bg: "bg-sea", soft: "bg-sea-soft", dot: "bg-sea", hex: "#0f766e" },
+  accent: { text: "text-accent", bg: "bg-accent", soft: "bg-accent-soft", dot: "bg-accent", hex: "#1e3a8a" },
 };

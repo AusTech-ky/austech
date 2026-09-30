@@ -26,8 +26,7 @@ export function Outcomes() {
       <Container>
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-12">
           <Reveal className="lg:col-span-5">
-            <p className="eyebrow">Why it matters</p>
-            <h2 className="mt-4 text-h2 font-semibold text-ink">
+            <h2 className="text-h2 font-semibold text-ink">
               We measure software by what it <span className="accent-serif">changes.</span>
             </h2>
             <p className="mt-5 max-w-md text-lead text-muted">

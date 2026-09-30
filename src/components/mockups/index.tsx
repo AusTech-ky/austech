@@ -1,6 +1,7 @@
 import type { MockupKey, MockupView } from "@/content/types";
 import { productNames } from "@/content/site";
-import { BrowserFrame, PhoneFrame } from "./frames";
+import Image from "next/image";
+import { BROWSER, BrowserFrame, PHONE, PhoneFrame, TABLET, TabletFrame } from "./frames";
 import { FuelUpAdmin, FuelUpDashboard, FuelUpMobile } from "./fuelup";
 import { SwiftMap, SwiftMobile, SwiftVehicle } from "./swift";
 import { RelayInbox, RelayMobile, RelayTeam } from "./relay";
@@ -52,7 +53,35 @@ const registry: Record<MockupKey, { address: string; views: Record<string, Scree
   },
 };
 
+/** A real screenshot, sized to the frame's viewport. */
+function Screenshot({ src, frame }: { src: string; frame: "browser" | "tablet" | "phone" }) {
+  const w = frame === "phone" ? PHONE.width - 24 : frame === "tablet" ? TABLET.width : BROWSER.width;
+  const h = frame === "phone" ? PHONE.height - 24 : frame === "tablet" ? TABLET.height : BROWSER.height - BROWSER.chrome;
+  // Served as captured (2x JPEGs): re-encoding at the optimiser's default quality made UI text grainy.
+  const image = <Image src={src} alt="" width={w} height={h} unoptimized className="h-full w-full object-cover object-top" />;
+  // Phone shots start below a status bar (capture them at 366×726) so the notch never covers the page.
+  return frame === "phone" ? <div className="h-full bg-[#0c0d0f] pt-[50px]">{image}</div> : image;
+}
+
 export function Mockup({ view, className }: { view: MockupView; className?: string }) {
+  if ("screenshot" in view) {
+    if (view.frame === "tablet")
+      return (
+        <TabletFrame label={view.alt} className={className}>
+          <Screenshot src={view.screenshot} frame="tablet" />
+        </TabletFrame>
+      );
+    return view.frame === "phone" ? (
+      <PhoneFrame label={view.alt} className={className}>
+        <Screenshot src={view.screenshot} frame="phone" />
+      </PhoneFrame>
+    ) : (
+      <BrowserFrame address={view.address ?? ""} label={view.alt} className={className}>
+        <Screenshot src={view.screenshot} frame="browser" />
+      </BrowserFrame>
+    );
+  }
+
   const product = registry[view.product];
   const screen = product?.views[view.view];
   if (!screen) return null;

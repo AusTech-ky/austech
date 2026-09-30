@@ -96,8 +96,7 @@ export function PricingBlock({ pricing, productName }: { pricing: Pricing; produ
     return (
       <Reveal className="grid gap-8 rounded-card bg-white p-6 ring-1 ring-line sm:p-8 md:grid-cols-[1.2fr_1fr] md:gap-12">
         <div>
-          <p className="eyebrow">Pricing</p>
-          <h4 className="mt-3 text-h3 font-semibold text-ink">{pricing.headline}</h4>
+          <h4 className="text-h3 font-semibold text-ink">{pricing.headline}</h4>
           <p className="mt-3 max-w-md text-[0.95rem] leading-relaxed text-muted">{pricing.description}</p>
           <Button href={pricing.cta.href} arrow className="mt-7">
             {pricing.cta.label}

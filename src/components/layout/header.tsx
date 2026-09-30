@@ -35,19 +35,35 @@ export function Header() {
     };
   }, [open]);
 
+  // Home and contact open on a dark band; until the page scrolls, the header sits on it.
+  const onDark = (pathname === "/" || pathname === "/contact") && !scrolled && !open;
+
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-300",
-        scrolled || open
-          ? "bg-paper/85 shadow-[0_1px_0_var(--color-line)] backdrop-blur-xl backdrop-saturate-150"
-          : "bg-transparent",
+        // Solid when the menu is open (a translucent bar turns grey over the dark home hero).
+        open
+          ? "bg-paper shadow-[0_1px_0_var(--color-line)]"
+          : scrolled
+            ? "bg-paper/95 shadow-[0_1px_0_var(--color-line)] backdrop-blur-xl backdrop-saturate-150"
+            : "bg-transparent",
       )}
     >
       <Container className="flex h-16 items-center justify-between">
-        <Logo />
+        <Logo
+          reversed={onDark}
+          onClick={(e) => {
+            // Already home: a link to the same page does nothing, so close the menu and go back to the top.
+            setOpen(false);
+            if (pathname === "/") {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
+        />
 
         <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
           {site.nav.map((item) => (
@@ -57,19 +73,25 @@ export function Header() {
               aria-current={isActive(item.href) ? "page" : undefined}
               className={cn(
                 "relative rounded-full px-3.5 py-2 text-[0.9rem] transition-colors",
-                isActive(item.href) ? "text-ink" : "text-muted hover:text-ink",
+                onDark
+                  ? isActive(item.href)
+                    ? "text-white"
+                    : "text-white/70 hover:text-white"
+                  : isActive(item.href)
+                    ? "text-ink"
+                    : "text-muted hover:text-ink",
               )}
             >
               {item.label}
               {isActive(item.href) && (
-                <span className="absolute inset-x-3.5 -bottom-px h-px bg-ink" aria-hidden />
+                <span className={cn("absolute inset-x-3.5 -bottom-px h-px", onDark ? "bg-white" : "bg-ink")} aria-hidden />
               )}
             </Link>
           ))}
         </nav>
 
         <div className="hidden md:block">
-          <Button href="/contact" size="md" arrow>
+          <Button href="/contact" size="md" arrow className={cn(onDark && "bg-white! text-navy! hover:bg-white/90!")}>
             Discuss your project
           </Button>
         </div>
@@ -85,13 +107,15 @@ export function Header() {
           <span className="relative block h-3 w-5">
             <span
               className={cn(
-                "absolute left-0 top-0 h-[1.5px] w-5 bg-ink transition-transform duration-300",
+                "absolute left-0 top-0 h-[1.5px] w-5 transition-transform duration-300",
+                onDark ? "bg-white" : "bg-ink",
                 open && "translate-y-[5px] rotate-45",
               )}
             />
             <span
               className={cn(
-                "absolute bottom-0 left-0 h-[1.5px] w-5 bg-ink transition-transform duration-300",
+                "absolute bottom-0 left-0 h-[1.5px] w-5 transition-transform duration-300",
+                onDark ? "bg-white" : "bg-ink",
                 open && "-translate-y-[5.5px] -rotate-45",
               )}
             />
@@ -126,7 +150,7 @@ export function Header() {
               Discuss your project
             </Button>
             <p className="mt-4 text-center text-sm text-muted">
-              {site.email} · {site.location.region}
+              {site.email} · {site.phone.display}
             </p>
           </div>
         </Container>

@@ -24,7 +24,7 @@ export const services: Service[] = [
     problem:
       "“We've tried three different SaaS tools. Each one does 70% of what we need, and we patch the rest together by hand.”",
     approach:
-      "We design the product with you: discovery, prototypes you can click, then an iterative build with working software every couple of weeks. You own the result, and it can grow as the business does.",
+      "We design the product with you: discovery, prototypes you can click, then an iterative build with working software every couple of weeks. Then we stay on to support it, so it can grow as the business does.",
     outcomes: [
       "A system that fits your process, not the other way round",
       "No per-seat fees scaling against your growth",

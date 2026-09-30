@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { getNextProject, getProduct, getProject, getProjects, serviceTitle } from "@/lib/content";
+import { getCaseStudies, getNextProject, getProduct, getProject, serviceTitle } from "@/lib/content";
 import { accentClasses } from "@/lib/accent";
 import { cn } from "@/lib/cn";
 import type { MockupView } from "@/content/types";
@@ -12,9 +12,10 @@ import { CtaBand } from "@/components/sections/cta-band";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/layout";
 import { Reveal } from "@/components/ui/reveal";
+import { StickyProductBar } from "@/components/work/sticky-product-bar";
 
 export async function generateStaticParams() {
-  return (await getProjects()).map((p) => ({ slug: p.slug }));
+  return (await getCaseStudies()).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: PageProps<"/work/[slug]">): Promise<Metadata> {
@@ -30,9 +31,21 @@ export async function generateMetadata({ params }: PageProps<"/work/[slug]">): P
 }
 
 /** Two-column case study section: label on the left, content on the right. */
-function Chapter({ n, label, intro, children }: { n: string; label: string; intro: string; children: React.ReactNode }) {
+function Chapter({
+  n,
+  label,
+  intro,
+  className,
+  children,
+}: {
+  n: string;
+  label: string;
+  intro: string;
+  className?: string;
+  children?: React.ReactNode;
+}) {
   return (
-    <section className="border-t border-line py-16 sm:py-24">
+    <section className={cn("border-t border-line py-16 sm:py-24", className)}>
       <Container className="grid gap-8 lg:grid-cols-12 lg:gap-12">
         <Reveal className="lg:col-span-4">
           <p className="font-mono text-[0.75rem] text-accent">{n}</p>
@@ -44,7 +57,7 @@ function Chapter({ n, label, intro, children }: { n: string; label: string; intr
               {intro}
             </p>
           </Reveal>
-          <div className="mt-10">{children}</div>
+          {children && <div className="mt-10">{children}</div>}
         </div>
       </Container>
     </section>
@@ -52,15 +65,24 @@ function Chapter({ n, label, intro, children }: { n: string; label: string; intr
 }
 
 function Gallery({ items, accent }: { items: MockupView[]; accent: Parameters<typeof Stage>[0]["accent"] }) {
-  const browsers = items.filter((i) => i.frame === "browser");
+  // Browser and tablet shots alternate sides; a shot's phone companion overlaps its corner.
+  const browsers = items.filter((i) => i.frame !== "phone");
   const phones = items.filter((i) => i.frame === "phone");
   return (
-    <div className="space-y-6">
+    <div className="space-y-12 sm:space-y-16">
+      {/* Picture about three-quarters wide, what it shows beside it; sides alternate row to row. */}
       {browsers.map((v, i) => (
-        <Reveal key={`${v.view}-${i}`}>
-          <figure>
-            <Stage accent={accent} main={v} compact />
-            {v.caption && <figcaption className="mt-3 text-[0.85rem] text-muted">{v.caption}</figcaption>}
+        <Reveal key={i}>
+          <figure className="grid items-center gap-6 lg:grid-cols-12 lg:gap-12">
+            <div className={cn("lg:col-span-9", i % 2 === 1 && "lg:order-2 lg:col-start-4")}>
+              <Stage accent={accent} main={v} phone={"screenshot" in v ? v.companion : undefined} compact />
+            </div>
+            {(v.title || v.caption) && (
+              <figcaption className={cn("lg:col-span-3", i % 2 === 1 && "lg:order-1 lg:col-start-1 lg:row-start-1")}>
+                {v.title && <p className="text-[1.2rem] font-semibold tracking-[-0.02em] text-ink">{v.title}</p>}
+                {v.caption && <p className="mt-2 text-[0.95rem] leading-relaxed text-muted">{v.caption}</p>}
+              </figcaption>
+            )}
           </figure>
         </Reveal>
       ))}
@@ -71,8 +93,7 @@ function Gallery({ items, accent }: { items: MockupView[]; accent: Parameters<ty
               <Mockup view={phones[0]} />
             </div>
             <div>
-              <p className="eyebrow">On the move</p>
-              <p className="mt-4 text-h3 font-semibold text-ink">{phones[0].caption}</p>
+              <p className="text-h3 font-semibold text-ink">{phones[0].caption}</p>
               <p className="mt-3 max-w-md text-[0.95rem] leading-relaxed text-muted">
                 Every screen is designed mobile-first and works on any modern phone, with no app store download required.
               </p>
@@ -88,6 +109,8 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
   const { slug } = await params;
   const project = await getProject(slug);
   if (!project) notFound();
+  const { challenge, approach, solution, impact } = project;
+  if (!challenge || !approach || !solution || !impact) notFound();
 
   const [next, product] = await Promise.all([
     getNextProject(project.slug),
@@ -97,7 +120,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
   const phone = project.gallery.find((g) => g.frame === "phone");
 
   const facts = [
-    { k: "Client", v: project.client },
+    ...(project.clientNamed ? [{ k: "Client", v: project.client }] : []),
     { k: "Sector", v: project.sector },
     { k: "Services", v: project.services.map(serviceTitle).join(", ") },
     { k: "Platform", v: project.platforms.join(", ") },
@@ -145,9 +168,9 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
 
       <div className="mt-8" />
 
-      <Chapter n="01" label="The challenge" intro={project.challenge.intro}>
+      <Chapter n="01" label="The challenge" intro={challenge.intro}>
         <ul className="grid gap-3 sm:grid-cols-2">
-          {project.challenge.points.map((p, i) => (
+          {challenge.points.map((p, i) => (
             <Reveal as="li" key={p} delay={i * 60} className="flex gap-4 rounded-2xl bg-canvas p-5">
               <span className="font-mono text-[0.75rem] leading-6 text-faint">0{i + 1}</span>
               <span className="text-[0.95rem] leading-relaxed text-ink-2">{p}</span>
@@ -156,9 +179,9 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
         </ul>
       </Chapter>
 
-      <Chapter n="02" label="Our approach" intro={project.approach.intro}>
+      <Chapter n="02" label="Our approach" intro={approach.intro}>
         <ol className="relative space-y-8 border-l border-line pl-8">
-          {project.approach.steps.map((s, i) => (
+          {approach.steps.map((s, i) => (
             <Reveal as="li" key={s.title} delay={i * 60} className="relative">
               <span className="absolute -left-[37px] top-1 grid size-[17px] place-items-center rounded-full bg-paper ring-1 ring-line-strong">
                 <span className={cn("size-[7px] rounded-full", a.dot)} />
@@ -170,17 +193,21 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
         </ol>
       </Chapter>
 
-      <Chapter n="03" label="The solution" intro={project.solution.intro}>
-        <div className="grid gap-px overflow-hidden rounded-card bg-line ring-1 ring-line sm:grid-cols-2 lg:grid-cols-3">
-          {project.solution.features.map((f, i) => (
-            <Reveal key={f.title} delay={(i % 3) * 60} className="bg-paper p-6">
-              <span className={cn("block h-0.5 w-6 rounded-full", a.bg)} />
-              <h3 className="mt-5 text-[1rem] font-semibold tracking-[-0.01em] text-ink">{f.title}</h3>
-              <p className="mt-2 text-[0.9rem] leading-relaxed text-muted">{f.description}</p>
-            </Reveal>
-          ))}
-        </div>
-      </Chapter>
+      <Chapter n="03" label="The solution" intro={solution.intro} className="pb-10 sm:pb-12" />
+      {/* Features span the full width under the chapter heading, four across, so the grid fills evenly. */}
+      <section className="pb-16 sm:pb-24">
+        <Container>
+          <div className="grid gap-px overflow-hidden rounded-card bg-line ring-1 ring-line sm:grid-cols-2 lg:grid-cols-4">
+            {solution.features.map((f, i) => (
+              <Reveal key={f.title} delay={(i % 4) * 60} className="bg-paper p-6">
+                <span className={cn("block h-0.5 w-6 rounded-full", a.bg)} />
+                <h3 className="mt-5 text-[1rem] font-semibold tracking-[-0.01em] text-ink">{f.title}</h3>
+                <p className="mt-2 text-[0.9rem] leading-relaxed text-muted">{f.description}</p>
+              </Reveal>
+            ))}
+          </div>
+        </Container>
+      </section>
 
       <section className="border-t border-line py-16 sm:py-24">
         <Container>
@@ -194,9 +221,9 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
         </Container>
       </section>
 
-      <Chapter n="05" label="Business impact" intro={project.impact.intro}>
+      <Chapter n="05" label="Business impact" intro={impact.intro}>
         <div className="grid gap-4 sm:grid-cols-3">
-          {project.impact.items.map((item, i) => (
+          {impact.items.map((item, i) => (
             <Reveal key={item.title} delay={i * 80} className="rounded-card bg-white p-6 ring-1 ring-line">
               {item.metric ? (
                 <p className="nums text-[2.4rem] font-semibold tracking-[-0.04em] text-ink">{item.metric}</p>
@@ -212,15 +239,27 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
         </div>
 
         {product && (
-          <Reveal className="mt-10 flex flex-col gap-5 rounded-card bg-canvas p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+          <div id="product-cta" className="mt-10">
+          <Reveal className="flex flex-col gap-5 rounded-card bg-canvas p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
             <div>
-              <p className="text-[1.05rem] font-semibold text-ink">{product.name} is available as a product</p>
+              <p className="text-[1.05rem] font-semibold text-ink">
+                {product.name} is available as a product
+                {product.international && (
+                  <span className="font-normal text-muted"> (including for companies outside the Cayman Islands)</span>
+                )}
+              </p>
               <p className="mt-1 text-[0.92rem] text-muted">{product.tagline}</p>
             </div>
-            <Button href={`/products#${product.slug}`} variant="secondary" arrow>
-              See {product.name}
-            </Button>
+            <div className="flex flex-wrap gap-3">
+              <Button href={`/contact?project=${product.slug}`} arrow>
+                Request a demo
+              </Button>
+              <Button href={`/products#${product.slug}`} variant="secondary">
+                See {product.name}
+              </Button>
+            </div>
           </Reveal>
+          </div>
         )}
       </Chapter>
 
@@ -243,6 +282,14 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
       )}
 
       <CtaBand />
+      {product && (
+        <StickyProductBar
+          name={product.name}
+          slug={product.slug}
+          tagline={product.tagline}
+          international={product.international}
+        />
+      )}
     </article>
   );
 }

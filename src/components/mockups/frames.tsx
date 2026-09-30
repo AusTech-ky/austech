@@ -4,6 +4,7 @@ import { ScaleFrame } from "./scale-frame";
 
 export const BROWSER = { width: 1200, height: 780, chrome: 40 };
 export const PHONE = { width: 390, height: 800 };
+export const TABLET = { width: 1180, height: 820, bezel: 22 };
 
 /** Desktop browser window. Children render in a 1200×740 viewport. */
 export function BrowserFrame({
@@ -68,6 +69,36 @@ export function PhoneFrame({
             {children}
             <div className="absolute bottom-[8px] left-1/2 z-20 h-[5px] w-[130px] -translate-x-1/2 rounded-full bg-ink/80" />
           </div>
+        </div>
+      </ScaleFrame>
+    </div>
+  );
+}
+
+/** Tablet in landscape. Children render in a 1180×820 screen. */
+export function TabletFrame({
+  label,
+  className,
+  children,
+}: {
+  label: string;
+  className?: string;
+  children: React.ReactNode;
+}) {
+  const b = TABLET.bezel;
+  return (
+    <div
+      className={cn(
+        "[filter:drop-shadow(0_30px_40px_rgb(13_16_20/0.16))_drop-shadow(0_2px_4px_rgb(13_16_20/0.08))]",
+        className,
+      )}
+    >
+      <ScaleFrame width={TABLET.width + b * 2} height={TABLET.height + b * 2} label={label}>
+        <div
+          className="h-full w-full rounded-[44px] bg-[#16181c] shadow-[inset_0_0_0_1.5px_#3a3d44,inset_0_0_0_4px_#0c0d0f]"
+          style={{ padding: b }}
+        >
+          <div className="relative h-full w-full overflow-hidden rounded-[24px] bg-white">{children}</div>
         </div>
       </ScaleFrame>
     </div>

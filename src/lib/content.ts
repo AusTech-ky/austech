@@ -9,7 +9,7 @@ import { projects } from "@/content/projects";
 import { products } from "@/content/products";
 import { services, engagementModels, process } from "@/content/services";
 import { team } from "@/content/team";
-import type { ServiceKey } from "@/content/types";
+import type { Project, ServiceKey } from "@/content/types";
 
 const byOrder = <T extends { order: number }>(a: T, b: T) => a.order - b.order;
 
@@ -21,13 +21,24 @@ export async function getFeaturedProjects() {
   return (await getProjects()).filter((p) => p.featured);
 }
 
-export async function getProject(slug: string) {
-  return projects.find((p) => p.slug === slug) ?? null;
+/** Coming-soon projects are shown as teasers only, with no case study page. */
+export function hasCaseStudy(p: Project) {
+  return p.status !== "coming-soon";
 }
 
-/** The project that follows `slug`, wrapping around. */
+export async function getCaseStudies() {
+  return (await getProjects()).filter(hasCaseStudy);
+}
+
+/** A project with a published case study, or null. */
+export async function getProject(slug: string) {
+  const p = projects.find((p) => p.slug === slug);
+  return p && hasCaseStudy(p) ? p : null;
+}
+
+/** The case study that follows `slug`, wrapping around. */
 export async function getNextProject(slug: string) {
-  const all = await getProjects();
+  const all = await getCaseStudies();
   const i = all.findIndex((p) => p.slug === slug);
   return all[(i + 1) % all.length];
 }

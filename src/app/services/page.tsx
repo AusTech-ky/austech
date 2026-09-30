@@ -4,6 +4,7 @@ import { getEngagementModels, getProcess, getServices } from "@/lib/content";
 import { PageHeader } from "@/components/sections/page-header";
 import { Process } from "@/components/sections/process";
 import { CtaBand } from "@/components/sections/cta-band";
+import { ClientLogos } from "@/components/sections/client-logos";
 import { serviceIcons } from "@/components/sections/capabilities";
 import { Button } from "@/components/ui/button";
 import { Container, Section, SectionHeader } from "@/components/ui/layout";
@@ -22,10 +23,9 @@ export default async function ServicesPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Services"
         title={
           <>
-            Start with the problem. <span className="accent-serif text-accent">Build the fix.</span>
+            Start with the problem. <span className="accent-serif">Build the fix.</span>
           </>
         }
         lead="We don't sell technology for its own sake. Each of our services exists to solve a problem growing businesses tell us about, and each is measured by what changes afterwards."
@@ -59,13 +59,14 @@ export default async function ServicesPage() {
                     </div>
                     <h2 className="mt-6 text-h2 font-semibold text-ink">{s.title}</h2>
                     <p className="mt-4 text-[1.02rem] leading-relaxed text-muted">{s.short}</p>
+                    <ClientLogos service={s.key} className="mt-8" />
                   </div>
                 </Reveal>
 
                 <div className="space-y-10 lg:col-span-7 lg:col-start-6">
                   <Reveal>
                     <p className="eyebrow">The problem</p>
-                    <blockquote className="mt-4 font-serif text-[clamp(1.5rem,1.2rem+1.2vw,2.1rem)] leading-[1.3] tracking-[-0.01em] text-ink">
+                    <blockquote className="mt-4 font-light text-[clamp(1.5rem,1.2rem+1.2vw,2.1rem)] leading-[1.3] tracking-[-0.01em] text-ink">
                       {s.problem}
                     </blockquote>
                   </Reveal>
@@ -108,7 +109,6 @@ export default async function ServicesPage() {
       <Section>
         <Container>
           <SectionHeader
-            eyebrow="Ways to work together"
             title="Engagements that fit the stage you're at"
             intro="Whether you need a single well-defined project or a long-term product team, the way we work stays the same: open, iterative and focused on outcomes."
           />

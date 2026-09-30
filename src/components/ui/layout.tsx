@@ -25,20 +25,15 @@ export function Section({
   );
 }
 
-export function Eyebrow({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <p className={cn("eyebrow", className)}>{children}</p>;
-}
 
-/** Standard section heading: eyebrow, title, optional intro. */
+/** Standard section heading: title, optional intro. */
 export function SectionHeader({
-  eyebrow,
   title,
   intro,
   align = "left",
   className,
   children,
 }: {
-  eyebrow?: string;
   title: React.ReactNode;
   intro?: React.ReactNode;
   align?: "left" | "center";
@@ -53,7 +48,6 @@ export function SectionHeader({
         className,
       )}
     >
-      {eyebrow && <Eyebrow className="mb-4">{eyebrow}</Eyebrow>}
       <h2 className="text-h2 font-semibold text-ink">{title}</h2>
       {intro && <p className="mt-5 text-lead text-muted">{intro}</p>}
       {children}

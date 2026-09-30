@@ -29,7 +29,6 @@ export default async function HomePage() {
         <Container>
           <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
             <SectionHeader
-              eyebrow="Selected work"
               title={
                 <>
                   Software people <span className="accent-serif">rely on</span>, every day
@@ -54,7 +53,6 @@ export default async function HomePage() {
         <Container>
           <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
             <SectionHeader
-              eyebrow="Our products"
               title={
                 <>
                   Ready-made platforms, built <span className="accent-serif">the same way</span>

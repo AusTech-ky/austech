@@ -12,8 +12,8 @@
   --color-mist: #eff1f4;
 
   /* Ink */
-  --color-ink: #0d1014;
-  --color-ink-2: #373c45;
+  --color-ink: #0b1220;
+  --color-ink-2: #1c2a3a;
   --color-muted: #666c77;
   --color-faint: #9aa0aa;
 
@@ -21,10 +21,15 @@
   --color-line: #e8e8e5;
   --color-line-strong: #d8d8d4;
 
-  /* Brand accent — calm cobalt */
-  --color-accent: #2f55d4;
-  --color-accent-strong: #2144b8;
-  --color-accent-soft: #eef2fd;
+  /* Brand — navy + sky, from the Austech logo */
+  --color-navy: #1e3a8a;
+  --color-navy-deep: #0f1e4a;
+  --color-sky: #60a5fa;
+  --color-accent: #1e3a8a;
+  --color-accent-strong: #0f1e4a;
+  --color-accent-soft: #eef3fd;
+  /* Sky, deepened just enough to read on light backgrounds */
+  --color-sky-ink: #3b82f6;
 
   /* Product accents (used inside mockups + product badges) */
   --color-fuel: #e27d0c;
@@ -37,6 +42,8 @@
   --color-property-soft: #f0eefd;
   --color-people: #df5a47;
   --color-people-soft: #fcefed;
+  --color-sea: #0f766e;
+  --color-sea-soft: #e6f4f2;
 
   /* Status */
   --color-positive: #13915f;
@@ -46,7 +53,6 @@
   /* Type */
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
-  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
 
   --text-display: clamp(2.75rem, 1.6rem + 5vw, 5.25rem);
   --text-display--line-height: 1.02;
@@ -68,7 +74,7 @@
   --shadow-soft: 0 1px 2px rgb(13 16 20 / 0.04), 0 8px 24px -12px rgb(13 16 20 / 0.08);
   --shadow-lift: 0 1px 2px rgb(13 16 20 / 0.04), 0 24px 48px -24px rgb(13 16 20 / 0.18);
   --shadow-frame: 0 0 0 1px rgb(13 16 20 / 0.06), 0 2px 4px rgb(13 16 20 / 0.03),
-    0 30px 60px -30px rgb(13 16 20 / 0.25), 0 60px 120px -60px rgb(47 85 212 / 0.18);
+    0 30px 60px -30px rgb(13 16 20 / 0.25), 0 60px 120px -60px rgb(30 58 138 / 0.18);
 
   /* Motion */
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
@@ -76,6 +82,12 @@
   --animate-pulse-ring: pulse-ring 2.4s var(--ease-out-soft) infinite;
   --animate-typing: typing 1.2s ease-in-out infinite;
   --animate-float: float 7s ease-in-out infinite;
+  --animate-caret: caret 1s steps(1) infinite;
+
+  @keyframes caret {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
 
   @keyframes pulse-ring {
     0% { transform: scale(0.6); opacity: 0.6; }
@@ -136,12 +148,11 @@
    Utilities
    ────────────────────────────────────────────────────────────── */
 
-/* Serif accent word inside headlines */
+/* Accent word inside headlines: light weight in sky, echoing TECH in the logo */
 @utility accent-serif {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.01em;
+  font-weight: 250;
+  letter-spacing: -0.03em;
+  color: var(--color-sky-ink);
 }
 
 /* Small uppercase label */
@@ -190,4 +201,57 @@
 .enter {
   animation: fade-up 0.9s var(--ease-out-soft) both;
   animation-delay: var(--enter-delay, 0ms);
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Hero network backdrop (components/sections/hero-network.tsx)
+   ────────────────────────────────────────────────────────────── */
+.hn-spin, .hn-spin-rev {
+  transform-box: view-box;
+  transform-origin: 300px 300px;
+  animation: hn-rotate 60s linear infinite;
+}
+.hn-spin-rev { animation-duration: 40s; animation-direction: reverse; }
+.hn-flow { animation: hn-flow 4s cubic-bezier(0.45, 0, 0.55, 1) infinite both; }
+.hn-ping {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hn-ping 3.2s var(--ease-out-soft) infinite both;
+}
+.hn-pin { animation: hn-pin 3.6s ease-in-out infinite both; }
+.hn-core { animation: hn-core 3.6s ease-in-out infinite; }
+.hn-breathe { animation: hn-breathe 6s ease-in-out infinite; }
+.hn-type {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: hn-type 5s var(--ease-out-soft) infinite both;
+}
+
+@keyframes hn-rotate { to { transform: rotate(360deg); } }
+@keyframes hn-flow {
+  0% { stroke-dashoffset: 100; opacity: 0; }
+  10% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { stroke-dashoffset: 7; opacity: 0; }
+}
+@keyframes hn-ping {
+  0% { transform: scale(1); opacity: 0.7; }
+  70%, 100% { transform: scale(3.2); opacity: 0; }
+}
+@keyframes hn-pin {
+  0%, 100% { stroke-opacity: 0.55; }
+  50% { stroke-opacity: 1; }
+}
+@keyframes hn-core {
+  0%, 100% { fill: #1e3a8a; }
+  50% { fill: #2848a8; }
+}
+@keyframes hn-breathe {
+  0%, 100% { opacity: 0.75; }
+  50% { opacity: 1; }
+}
+@keyframes hn-type {
+  0% { transform: scaleX(0); }
+  25%, 75% { transform: scaleX(1); }
+  95%, 100% { transform: scaleX(0); }
 }

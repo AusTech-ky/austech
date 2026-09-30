@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/content/site";
-import { getProjects } from "@/lib/content";
+import { getCaseStudies } from "@/lib/content";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const projects = await getProjects();
+  const projects = await getCaseStudies();
   const now = new Date();
-  const pages = ["", "/services", "/work", "/products", "/about", "/contact"].map((path) => ({
+  const pages = ["", "/services", "/work", "/products", "/about", "/contact", "/cookies", "/privacy"].map((path) => ({
     url: `${site.url}${path}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
