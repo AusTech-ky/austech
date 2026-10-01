@@ -29,5 +29,6 @@ COPY --from=build --chown=app:app /app/.next/static ./.next/static
 COPY --from=build --chown=app:app /app/public ./public
 USER app
 EXPOSE 3000
-HEALTHCHECK --interval=30s --timeout=5s --start-period=20s CMD wget -q --spider http://127.0.0.1:3000/ || exit 1
+# Checks whatever port the app was told to use (Coolify may set PORT from "Ports Exposes").
+HEALTHCHECK --interval=30s --timeout=5s --start-period=20s CMD wget -q --spider "http://127.0.0.1:${PORT:-3000}/" || exit 1
 CMD ["node", "server.js"]
