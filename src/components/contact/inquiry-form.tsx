@@ -215,7 +215,15 @@ function Select({ id, label, options, defaultValue }: { id: string; label: strin
   );
 }
 
-export function InquiryForm({ defaults, products }: { defaults?: InquiryValues; products: ProductChoice[] }) {
+export function InquiryForm({
+  defaults,
+  products,
+  turnstileSiteKey,
+}: {
+  defaults?: InquiryValues;
+  products: ProductChoice[];
+  turnstileSiteKey?: string;
+}) {
   const [state, action, pending] = useActionState(submitInquiry, initial);
   // The success result the visitor dismissed with "Send another inquiry".
   const [dismissed, setDismissed] = useState<InquiryState | null>(null);
@@ -304,7 +312,7 @@ export function InquiryForm({ defaults, products }: { defaults?: InquiryValues; 
         />
       </Field>
 
-      <Turnstile />
+      <Turnstile siteKey={turnstileSiteKey} />
 
       {/* Honeypot */}
       <div aria-hidden className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden">

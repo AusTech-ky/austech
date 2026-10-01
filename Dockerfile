@@ -1,6 +1,7 @@
 # Next.js standalone build for Coolify (or any Docker host).
-# NEXT_PUBLIC_* values are baked into the browser bundle at build time,
-# so they're passed as build args; everything else is read at runtime.
+# No build-time variables are required: everything is read at runtime.
+# NEXT_PUBLIC_SITE_URL can optionally be passed as a build arg; it defaults
+# to https://austech.ky.
 
 FROM node:22-alpine AS deps
 WORKDIR /app
@@ -10,20 +11,18 @@ RUN npm ci
 FROM node:22-alpine AS build
 WORKDIR /app
 ARG NEXT_PUBLIC_SITE_URL=https://austech.ky
-ARG NEXT_PUBLIC_TURNSTILE_SITE_KEY=
-ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL \
-    NEXT_PUBLIC_TURNSTILE_SITE_KEY=$NEXT_PUBLIC_TURNSTILE_SITE_KEY \
-    NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
+ENV NEXT_TELEMETRY_DISABLED=1
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
 
 FROM node:22-alpine AS run
 WORKDIR /app
-ENV NODE_ENV=production \
-    NEXT_TELEMETRY_DISABLED=1 \
-    PORT=3000 \
-    HOSTNAME=0.0.0.0
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV PORT=3000
+ENV HOSTNAME=0.0.0.0
 RUN addgroup -S app && adduser -S app -G app
 COPY --from=build --chown=app:app /app/.next/standalone ./
 COPY --from=build --chown=app:app /app/.next/static ./.next/static

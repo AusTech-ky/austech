@@ -29,10 +29,10 @@ function loadScript(): Promise<void> {
  * Cloudflare Turnstile in "interaction-only" mode: invisible unless Cloudflare
  * needs the visitor to tick a box. Adds a hidden `cf-turnstile-response` field
  * to the surrounding form, which the server action verifies.
- * Renders nothing when NEXT_PUBLIC_TURNSTILE_SITE_KEY isn't set.
+ * The site key is passed in from the server at request time (TURNSTILE_SITE_KEY),
+ * so it doesn't need to exist at build time. Renders nothing without one.
  */
-export function Turnstile() {
-  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+export function Turnstile({ siteKey }: { siteKey?: string }) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

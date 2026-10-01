@@ -86,7 +86,11 @@ export default async function ContactPage({ searchParams }: PageProps<"/contact"
         </div>
 
         <div className="enter lg:col-span-7" style={{ "--enter-delay": "180ms" } as React.CSSProperties}>
-          <InquiryForm defaults={defaults} products={products.map((p) => ({ slug: p.slug, name: p.name, soon: p.status === "coming-soon" }))} />
+          <InquiryForm
+            defaults={defaults}
+            products={products.map((p) => ({ slug: p.slug, name: p.name, soon: p.status === "coming-soon" }))}
+            turnstileSiteKey={process.env.TURNSTILE_SITE_KEY}
+          />
           <p className="mt-4 text-center text-[0.75rem] text-white/40">
             <Link href="/privacy" className="underline underline-offset-2 hover:text-white/70">
               Privacy policy

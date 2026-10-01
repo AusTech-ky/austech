@@ -1,12 +1,11 @@
 # Coolify: set the variables below in the app's Environment Variables.
-# Mark NEXT_PUBLIC_SITE_URL and NEXT_PUBLIC_TURNSTILE_SITE_KEY as build-time.
+# None of them are needed at build time.
 services:
   web:
     build:
       context: .
       args:
         NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-https://austech.ky}
-        NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${NEXT_PUBLIC_TURNSTILE_SITE_KEY:-}
     restart: unless-stopped
     expose:
       - "3000"
@@ -19,6 +18,7 @@ services:
       SES_TENANT: ${SES_TENANT:-Austech}
       INQUIRY_TO: ${INQUIRY_TO:-info@austech.ky}
       INQUIRY_FROM: ${INQUIRY_FROM:-Austech <website@austech.ky>}
+      TURNSTILE_SITE_KEY: ${TURNSTILE_SITE_KEY:-}
       TURNSTILE_SECRET_KEY: ${TURNSTILE_SECRET_KEY:-}
     healthcheck:
       test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:3000/"]
