@@ -300,6 +300,87 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "swift-bank-reconciliation",
+    name: "Automated Bookkeeping",
+    client: "Swift Auto Rentals",
+    clientNamed: true,
+    tagline:
+      "Bank statements that categorise themselves, so Swift's books are done in minutes instead of an afternoon of typing.",
+    summary:
+      "A bank processing tool for Swift Auto Rentals. Staff upload a bank statement, every transaction is categorised and matched to a supplier, a customer invoice or a vehicle, and the result goes straight into Zoho as expenses and payments.",
+    sector: "Vehicle rental & leasing",
+    services: ["automation", "integrations", "bespoke-software"],
+    platforms: ["Web app", "Zoho Books & Expense"],
+    accent: "swift",
+    status: "live",
+    featured: true,
+    order: 2,
+    hero: { product: "swiftbooks", view: "review", frame: "browser" },
+    challenge: {
+      intro:
+        "Banks in the Cayman Islands don't connect to the accounting platforms most businesses rely on, so nothing flows across on its own. Every line on Swift's statements had to be keyed in by hand.",
+      points: [
+        "Each expense was written up one by one, from a bank memo that rarely said clearly who it was from",
+        "Working out the supplier, the right account and which vehicle a cost belonged to took hours every statement",
+        "Customer payments had to be matched to invoices by eye, then recorded again in Zoho",
+        "Licensing, insurance and repairs weren't tied to vehicles, so cost per car was guesswork",
+      ],
+    },
+    approach: {
+      intro:
+        "We sat with the people doing the books, watched a statement being worked through line by line, and built the tool around the decisions they were making by hand.",
+      steps: [
+        { title: "Start from the bank file", description: "No bank integration exists, so the tool reads the statement exports staff already download, whichever bank and layout they come in." },
+        { title: "Let AI do the first pass", description: "Every transaction is categorised against Swift's own chart of accounts, with a confidence score, so people only look at the lines that need them." },
+        { title: "Shape it around the fleet", description: "Costs are tied to a vehicle by licence plate, so licensing, insurance, fuel and repairs land on the right car automatically." },
+      ],
+    },
+    solution: {
+      intro:
+        "A web app where a whole statement goes from upload to finished books in one sitting, with people reviewing rather than typing.",
+      features: [
+        { title: "Upload any statement", description: "Bank exports in CSV or Excel are read automatically, whatever the bank's column layout." },
+        { title: "AI categorisation", description: "Each line is matched to the right account and supplier, with low-confidence lines highlighted for review." },
+        { title: "Vehicle licensing & costs", description: "Licence renewals, insurance and repairs are linked to the vehicle's plate, giving a true cost per car." },
+        { title: "Deposits that match themselves", description: "Incoming payments are matched to open invoices by number, name and amount, then applied in Zoho Books." },
+        { title: "Deposit refunds handled", description: "Security deposit refunds are recognised and kept off the expense report, where they don't belong." },
+        { title: "One-click to Zoho", description: "Approved expenses go to Zoho Expense as a dated report; re-submitting updates it rather than duplicating it." },
+      ],
+    },
+    gallery: [
+      {
+        product: "swiftbooks",
+        view: "review",
+        frame: "browser",
+        title: "Review, don't retype",
+        caption: "Every bank line arrives categorised, with its supplier, account and vehicle. Only the amber, low-confidence lines need a person.",
+      },
+      {
+        product: "swiftbooks",
+        view: "credits",
+        frame: "browser",
+        title: "Payments matched to invoices",
+        caption: "Deposits are matched to open invoices and applied in Zoho Books in one go. Anything unclear is left for a quick pick.",
+      },
+      {
+        product: "swiftbooks",
+        view: "report",
+        frame: "browser",
+        title: "Books done, with cost per vehicle",
+        caption: "The finished statement goes to Zoho Expense as a report, with totals by account, what each vehicle cost to run and which licence renewals are paid.",
+      },
+    ],
+    impact: {
+      intro:
+        "Bookkeeping that used to mean an afternoon of typing is now a short review, and the numbers in Zoho are complete and consistent.",
+      items: [
+        { title: "Minutes, not hours", description: "A statement is categorised in seconds; staff review the exceptions instead of writing up every line." },
+        { title: "Every cost on the right car", description: "Licensing, insurance and repairs are tracked per vehicle, so fleet decisions use real numbers." },
+        { title: "Payments recorded once", description: "Customer payments are matched and applied straight from the bank statement, with nothing typed twice." },
+      ],
+    },
+  },
+  {
     slug: "swift-vehicle-tracking",
     name: "Swift Fleet",
     client: "Swift", // Vehicle leasing & rental
@@ -313,7 +394,7 @@ export const projects: Project[] = [
     accent: "swift",
     status: "coming-soon",
     featured: true,
-    order: 3,
+    order: 4,
     hero: { product: "swift", view: "map", frame: "browser" },
     challenge: {
       intro:
@@ -374,7 +455,7 @@ export const projects: Project[] = [
     accent: "relay",
     status: "coming-soon",
     featured: true,
-    order: 4,
+    order: 5,
     hero: { product: "relay", view: "inbox", frame: "browser" },
     challenge: {
       intro:

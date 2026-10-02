@@ -12,7 +12,7 @@
 export type Accent = "fuel" | "swift" | "relay" | "property" | "people" | "sea" | "accent";
 
 /** Keys for the coded product UI mockups in `components/mockups`. */
-export type MockupKey = "fuelup" | "swift" | "relay" | "property" | "people";
+export type MockupKey = "fuelup" | "swift" | "relay" | "property" | "people" | "swiftbooks";
 
 /**
  * A single screen shown in a device frame: either a coded product mockup,

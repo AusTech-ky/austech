@@ -4,6 +4,7 @@ import Image from "next/image";
 import { BROWSER, BrowserFrame, PHONE, PhoneFrame, TABLET, TabletFrame } from "./frames";
 import { FuelUpAdmin, FuelUpDashboard, FuelUpMobile } from "./fuelup";
 import { SwiftMap, SwiftMobile, SwiftVehicle } from "./swift";
+import { SwiftBooksCredits, SwiftBooksReport, SwiftBooksReview } from "./swift-books";
 import { RelayInbox, RelayMobile, RelayTeam } from "./relay";
 import { PeopleOverview, PropertyOverview } from "./upcoming";
 
@@ -29,6 +30,14 @@ const registry: Record<MockupKey, { address: string; views: Record<string, Scree
       map: { component: SwiftMap, label: "Swift fleet platform live map with vehicle positions, status filters and a selected vehicle" },
       vehicle: { component: SwiftVehicle, label: "Swift vehicle detail with trip route, lease agreement, service status and alerts" },
       mobile: { component: SwiftMobile, label: "Swift mobile view locating a vehicle on the map" },
+    },
+  },
+  swiftbooks: {
+    address: "Swift · Bank processing",
+    views: {
+      review: { component: SwiftBooksReview, label: "Swift bank statement review: each transaction categorised by AI with merchant, account, vehicle and confidence (dummy data)" },
+      credits: { component: SwiftBooksCredits, label: "Swift credits tab: bank deposits matched to open invoices and applied as payments (dummy data)" },
+      report: { component: SwiftBooksReport, label: "Swift expense report ready for Zoho Expense, with totals by account and cost per vehicle (dummy data)" },
     },
   },
   relay: {
