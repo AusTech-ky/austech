@@ -87,19 +87,19 @@ function Confidence({ value }: { value: number }) {
 // ─── Review: every bank line, categorised ───────────────────────
 
 const expenseRows = [
-  { date: "Sep 15", memo: "POS DVDL GT VEH LIC RENEW 0915", merchant: "DVDL", account: "Vehicle licensing", vehicle: "KY-4821", amount: "214.00", conf: 0.97, done: true },
-  { date: "Sep 15", memo: "POS DVDL GT VEH LIC RENEW 0915", merchant: "DVDL", account: "Vehicle licensing", vehicle: "KY-5160", amount: "214.00", conf: 0.96, done: true },
-  { date: "Sep 14", memo: "POS 2231 ISLAND AUTO PARTS", merchant: "Island Auto Parts", account: "Repairs & maintenance", vehicle: "KY-7713", amount: "386.40", conf: 0.91, done: true },
-  { date: "Sep 13", memo: "TRF TO R. EBANKS DEP REFUND", merchant: "Customer refund", account: "Lessee deposits", vehicle: "KY-2290", amount: "400.00", conf: 0.88, done: false },
-  { date: "Sep 12", memo: "POS 0412 GT MART 0912", merchant: "—", account: "Unsure", vehicle: "", amount: "57.18", conf: 0.52, done: false },
-  { date: "Sep 12", memo: "DD SAGICOR GEN INS POL 77104", merchant: "Sagicor General", account: "Vehicle insurance", vehicle: "KY-1184", amount: "1,240.00", conf: 0.94, done: true },
-  { date: "Sep 11", memo: "POS RUBIS WB 0911", merchant: "Rubis", account: "Fuel", vehicle: "KY-3056", amount: "92.65", conf: 0.93, done: true },
-  { date: "Sep 10", memo: "DD CUC ACCT 30418", merchant: "CUC", account: "Utilities", vehicle: "", amount: "611.27", conf: 0.98, done: true },
+  { date: "Sep 15", memo: "POS VEH LICENSING OFFICE 0915", merchant: "Licensing office", account: "Vehicle licensing", vehicle: "DEMO-01", amount: "214.00", conf: 0.97, done: true },
+  { date: "Sep 15", memo: "POS VEH LICENSING OFFICE 0915", merchant: "Licensing office", account: "Vehicle licensing", vehicle: "DEMO-02", amount: "214.00", conf: 0.96, done: true },
+  { date: "Sep 14", memo: "POS 2231 SAMPLE AUTO PARTS", merchant: "Sample Auto Parts", account: "Repairs & maintenance", vehicle: "DEMO-03", amount: "386.40", conf: 0.91, done: true },
+  { date: "Sep 13", memo: "TRF TO J. SAMPLE DEP REFUND", merchant: "Customer refund", account: "Lessee deposits", vehicle: "DEMO-04", amount: "400.00", conf: 0.88, done: false },
+  { date: "Sep 12", memo: "POS 0412 CORNER MART 0912", merchant: "—", account: "Unsure", vehicle: "", amount: "57.18", conf: 0.52, done: false },
+  { date: "Sep 12", memo: "DD DEMO GENERAL INS POL 00104", merchant: "Demo General Insurance", account: "Vehicle insurance", vehicle: "DEMO-05", amount: "1,240.00", conf: 0.94, done: true },
+  { date: "Sep 11", memo: "POS EXAMPLE FUELS 0911", merchant: "Example Fuels", account: "Fuel", vehicle: "DEMO-06", amount: "92.65", conf: 0.93, done: true },
+  { date: "Sep 10", memo: "DD POWER CO ACCT 00418", merchant: "Power Co", account: "Utilities", vehicle: "", amount: "611.27", conf: 0.98, done: true },
   { date: "Sep 10", memo: "SVC CHG WIRE FEE", merchant: "Bank fees", account: "Bank charges", vehicle: "", amount: "25.00", conf: 0.99, done: true },
-  { date: "Sep 09", memo: "POS 7781 TYRE WORLD", merchant: "Tyre World", account: "Repairs & maintenance", vehicle: "KY-6402", amount: "528.00", conf: 0.66, done: false },
-  { date: "Sep 08", memo: "DD MICROSOFT 365 BUS", merchant: "Microsoft", account: "Software & subscriptions", vehicle: "", amount: "66.00", conf: 0.98, done: true },
-  { date: "Sep 08", memo: "POS DVDL GT VEH LIC RENEW 0908", merchant: "DVDL", account: "Vehicle licensing", vehicle: "KY-6402", amount: "214.00", conf: 0.96, done: true },
-  { date: "Sep 05", memo: "POS 3302 QUICK LUBE GT", merchant: "Quick Lube", account: "Repairs & maintenance", vehicle: "KY-1184", amount: "89.95", conf: 0.89, done: true },
+  { date: "Sep 09", memo: "POS 7781 DEMO TYRES", merchant: "Demo Tyres", account: "Repairs & maintenance", vehicle: "DEMO-07", amount: "528.00", conf: 0.66, done: false },
+  { date: "Sep 08", memo: "DD OFFICE SUITE SUBS", merchant: "Office suite", account: "Software & subscriptions", vehicle: "", amount: "66.00", conf: 0.98, done: true },
+  { date: "Sep 08", memo: "POS VEH LICENSING OFFICE 0908", merchant: "Licensing office", account: "Vehicle licensing", vehicle: "DEMO-07", amount: "214.00", conf: 0.96, done: true },
+  { date: "Sep 05", memo: "POS 3302 DEMO LUBE", merchant: "Demo Lube", account: "Repairs & maintenance", vehicle: "DEMO-05", amount: "89.95", conf: 0.89, done: true },
 ];
 
 export function SwiftBooksReview() {
@@ -169,15 +169,15 @@ export function SwiftBooksReview() {
 // ─── Credits: deposits matched to invoices ──────────────────────
 
 const creditRows = [
-  { date: "Sep 15", memo: "TRF FROM ISLAND LOGISTICS INV-1043", customer: "Island Logistics Ltd", invoice: "INV-1043", how: "Invoice no.", score: 95, amount: "2,850.00", applied: true },
-  { date: "Sep 14", memo: "CHQ DEP 000183 HARBOUR PLUMBING", customer: "Harbour Plumbing", invoice: "INV-1051", how: "Name + amount", score: 88, amount: "1,190.00", applied: true },
-  { date: "Sep 13", memo: "TRF M. BODDEN LEASE SEPT", customer: "Marcus Bodden", invoice: "INV-1058", how: "Name + amount", score: 84, amount: "975.00", applied: false },
+  { date: "Sep 15", memo: "TRF FROM ACME LOGISTICS INV-1043", customer: "Acme Logistics Ltd", invoice: "INV-1043", how: "Invoice no.", score: 95, amount: "2,850.00", applied: true },
+  { date: "Sep 14", memo: "CHQ DEP 000183 SAMPLE PLUMBING", customer: "Sample Plumbing", invoice: "INV-1051", how: "Name + amount", score: 88, amount: "1,190.00", applied: true },
+  { date: "Sep 13", memo: "TRF A. CUSTOMER LEASE SEPT", customer: "Alex Customer", invoice: "INV-1058", how: "Name + amount", score: 84, amount: "975.00", applied: false },
   { date: "Sep 12", memo: "CARD SETTLEMENT 0912", customer: "Website payments", invoice: "6 bookings", how: "Card batch", score: 92, amount: "3,412.50", applied: true },
-  { date: "Sep 11", memo: "TRF SEAVIEW CONSTR", customer: "—", invoice: "Pick invoice", how: "No match", score: 0, amount: "640.00", applied: false },
-  { date: "Sep 10", memo: "TRF FROM CORAL BAY HOTEL INV1039", customer: "Coral Bay Hotel", invoice: "INV-1039", how: "Invoice no.", score: 95, amount: "4,200.00", applied: true },
+  { date: "Sep 11", memo: "TRF EXAMPLE CONSTR", customer: "—", invoice: "Pick invoice", how: "No match", score: 0, amount: "640.00", applied: false },
+  { date: "Sep 10", memo: "TRF FROM DEMO HOTEL INV1039", customer: "Demo Hotel", invoice: "INV-1039", how: "Invoice no.", score: 95, amount: "4,200.00", applied: true },
   { date: "Sep 09", memo: "CARD SETTLEMENT 0909", customer: "Website payments", invoice: "4 bookings", how: "Card batch", score: 92, amount: "1,860.00", applied: true },
-  { date: "Sep 08", memo: "TRF K. WATSON WEEKLY RENTAL", customer: "Kerry Watson", invoice: "INV-1036", how: "Name + amount", score: 86, amount: "385.00", applied: true },
-  { date: "Sep 05", memo: "CHQ DEP 000179 ISLAND LOGISTICS", customer: "Island Logistics Ltd", invoice: "INV-1031", how: "Name + amount", score: 90, amount: "2,850.00", applied: true },
+  { date: "Sep 08", memo: "TRF J. DOE WEEKLY RENTAL", customer: "Jordan Doe", invoice: "INV-1036", how: "Name + amount", score: 86, amount: "385.00", applied: true },
+  { date: "Sep 05", memo: "CHQ DEP 000179 ACME LOGISTICS", customer: "Acme Logistics Ltd", invoice: "INV-1031", how: "Name + amount", score: 90, amount: "2,850.00", applied: true },
 ];
 
 export function SwiftBooksCredits() {
@@ -249,17 +249,17 @@ const byAccount = [
   { name: "Other", amount: 529.6, n: 4 },
 ];
 const byVehicle = [
-  { plate: "KY-7713", model: "Ford Ranger", amount: 1914.4 },
-  { plate: "KY-1184", model: "Toyota Yaris", amount: 1454.0 },
-  { plate: "KY-6402", model: "Nissan Kicks", amount: 1102.0 },
-  { plate: "KY-4821", model: "Toyota Hilux", amount: 860.65 },
-  { plate: "KY-5160", model: "Honda CR-V", amount: 642.0 },
+  { plate: "DEMO-03", model: "Ford Ranger", amount: 1914.4 },
+  { plate: "DEMO-05", model: "Toyota Yaris", amount: 1454.0 },
+  { plate: "DEMO-07", model: "Nissan Kicks", amount: 1102.0 },
+  { plate: "DEMO-01", model: "Toyota Hilux", amount: 860.65 },
+  { plate: "DEMO-02", model: "Honda CR-V", amount: 642.0 },
 ];
 const licences = [
-  { plate: "KY-4821", model: "Toyota Hilux", due: "Sep 30", paid: "Sep 15", amount: 214 },
-  { plate: "KY-5160", model: "Honda CR-V", due: "Sep 30", paid: "Sep 15", amount: 214 },
-  { plate: "KY-6402", model: "Nissan Kicks", due: "Oct 04", paid: "Sep 08", amount: 214 },
-  { plate: "KY-3056", model: "Kia Sportage", due: "Oct 12", paid: null, amount: 214 },
+  { plate: "DEMO-01", model: "Toyota Hilux", due: "Sep 30", paid: "Sep 15", amount: 214 },
+  { plate: "DEMO-02", model: "Honda CR-V", due: "Sep 30", paid: "Sep 15", amount: 214 },
+  { plate: "DEMO-07", model: "Nissan Kicks", due: "Oct 04", paid: "Sep 08", amount: 214 },
+  { plate: "DEMO-06", model: "Kia Sportage", due: "Oct 12", paid: null, amount: 214 },
 ];
 const fmt = (n: number) => n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
@@ -324,7 +324,7 @@ export function SwiftBooksReport() {
         </Card>
       </div>
       <Card className="mt-4">
-        <CardHeader title="Vehicle licence renewals" right="Matched from DVDL payments on the statement" />
+        <CardHeader title="Vehicle licence renewals" right="Matched from licensing payments on the statement" />
         <div className="px-4 pb-2">
           {licences.map((l) => (
             <div key={l.plate} className="grid grid-cols-[90px_1fr_110px_120px_90px] items-center gap-3 border-b border-[#f4f4f2] py-[9px] text-[12px] last:border-0">
