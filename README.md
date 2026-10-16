@@ -51,7 +51,6 @@ A product's `pricing.model` can be `"tiers"`, `"custom"` or `"none"`.
 ## Before launch: placeholders to confirm
 
 - `site.ts`: legal name, domain, email (all marked `PLACEHOLDER`)
-- `productNames.property` ("Harbour") and `productNames.people` ("Roster") are placeholder names
 - `products.ts`: every Relay tier price is a placeholder, and the "[n]" team-member limits need filling in
 - `projects.ts`: the Fuel Up client name. Have Swift and the Fuel Up client approve their case study copy. Only add impact `metric`s that are real and approved
 - Contact delivery: set `RESEND_API_KEY` (or swap `deliver()` in `src/app/contact/actions.ts` for your CRM)

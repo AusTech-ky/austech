@@ -35,6 +35,5 @@ export const site = {
 export const productNames = {
   relay: "Relay",
   fuelup: "Fuel Up",
-  property: "Harbour", // PLACEHOLDER name — property management platform
-  people: "Roster", // PLACEHOLDER name — HR platform
+  people: "Roster",
 } as const;

@@ -6,7 +6,7 @@ import { FuelUpAdmin, FuelUpDashboard, FuelUpMobile } from "./fuelup";
 import { SwiftMap, SwiftMobile, SwiftVehicle } from "./swift";
 import { SwiftBooksCredits, SwiftBooksReport, SwiftBooksReview } from "./swift-books";
 import { RelayInbox, RelayMobile, RelayTeam } from "./relay";
-import { PeopleOverview, PropertyOverview } from "./upcoming";
+import { PeopleOverview } from "./roster";
 
 type Screen = { component: React.ComponentType; label: string };
 
@@ -48,14 +48,8 @@ const registry: Record<MockupKey, { address: string; views: Record<string, Scree
       mobile: { component: RelayMobile, label: `${productNames.relay} mobile conversation view` },
     },
   },
-  property: {
-    address: `${productNames.property} · Overview`,
-    views: {
-      overview: { component: PropertyOverview, label: `${productNames.property} property management dashboard (in development)` },
-    },
-  },
   people: {
-    address: `${productNames.people} · Home`,
+    address: `manage.ky · ${productNames.people}`,
     views: {
       overview: { component: PeopleOverview, label: `${productNames.people} HR dashboard (in development)` },
     },

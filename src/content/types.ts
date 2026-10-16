@@ -9,10 +9,10 @@
  */
 
 /** Product accent palette. Maps to --color-{accent} tokens in globals.css. */
-export type Accent = "fuel" | "swift" | "relay" | "property" | "people" | "sea" | "accent";
+export type Accent = "fuel" | "swift" | "relay" | "people" | "sea" | "accent";
 
 /** Keys for the coded product UI mockups in `components/mockups`. */
-export type MockupKey = "fuelup" | "swift" | "relay" | "property" | "people" | "swiftbooks";
+export type MockupKey = "fuelup" | "swift" | "relay" | "people" | "swiftbooks";
 
 /**
  * A single screen shown in a device frame: either a coded product mockup,
@@ -153,6 +153,12 @@ export type Product = {
   caseStudySlug?: string;
   /** Also sold to companies outside the Cayman Islands. */
   international?: boolean;
+  /** Sold under its own brand: shown as "{name} by {by}", and links go to its own site. */
+  brand?: { by: string; href: string };
+  /** Shown as a large, dark spotlight instead of a regular card or section. */
+  spotlight?: boolean;
+  /** Overrides the "Coming soon" badge, e.g. "Launching soon". */
+  statusLabel?: string;
 };
 
 // ─── Services ────────────────────────────────────────────────────

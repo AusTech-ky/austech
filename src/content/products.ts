@@ -21,7 +21,7 @@ export const products: Product[] = [
     accent: "relay",
     mockup: "relay",
     status: "coming-soon",
-    order: 2,
+    order: 3,
     features: [
       { title: "Shared inbox", description: "Every conversation on your number, in one place, for the whole team." },
       { title: "Assign & hand over", description: "Clear ownership of each chat, with context that travels with it." },
@@ -81,29 +81,9 @@ export const products: Product[] = [
     international: true,
   },
   {
-    slug: "property",
-    name: productNames.property,
-    category: "Property management",
-    tagline: "Leases, rent and maintenance in one calm dashboard.",
-    description:
-      "A property management platform for landlords and managers with a handful of units or a few hundred: tenancies, rent collection, maintenance requests and owner reporting.",
-    audience: "For landlords, property managers and strata.",
-    accent: "property",
-    mockup: "property",
-    status: "coming-soon",
-    order: 3,
-    features: [
-      { title: "Units & tenancies", description: "Every property, unit and lease with key dates in one place." },
-      { title: "Rent tracking", description: "See what's paid, due and overdue, with automatic reminders." },
-      { title: "Maintenance requests", description: "Tenants report issues; you assign, track and close them." },
-      { title: "Owner reporting", description: "Clear statements for owners, generated automatically." },
-    ],
-    screens: [{ product: "property", view: "overview", frame: "browser" }],
-    pricing: { model: "none" },
-  },
-  {
-    slug: "people",
+    slug: "roster",
     name: productNames.people,
+    brand: { by: "Manage.ky", href: "https://manage.ky" },
     category: "HR platform",
     tagline: "People admin without the paperwork.",
     description:
@@ -112,7 +92,9 @@ export const products: Product[] = [
     accent: "people",
     mockup: "people",
     status: "coming-soon",
-    order: 4,
+    statusLabel: "Launching soon",
+    spotlight: true,
+    order: 2,
     features: [
       { title: "Employee records", description: "One secure place for every employee's details and documents." },
       { title: "Leave & time off", description: "Requests, approvals and balances without the email chains." },

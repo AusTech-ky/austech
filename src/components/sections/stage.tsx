@@ -6,7 +6,6 @@ const tints: Record<Accent, string> = {
   fuel: "from-[#fdf1e2] via-[#fbf6ef] to-[#f7f6f3]",
   swift: "from-[#e6eefd] via-[#f1f5fc] to-[#f6f6f4]",
   relay: "from-[#e3f4ec] via-[#eff7f3] to-[#f6f6f4]",
-  property: "from-[#eeebfc] via-[#f4f2fb] to-[#f6f6f4]",
   people: "from-[#fbe9e6] via-[#faf2f0] to-[#f6f6f4]",
   sea: "from-[#e0f1ee] via-[#edf6f4] to-[#f6f6f4]",
   accent: "from-[#e9eefc] via-[#f2f4fb] to-[#f6f6f4]",

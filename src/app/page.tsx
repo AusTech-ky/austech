@@ -6,6 +6,7 @@ import { Process } from "@/components/sections/process";
 import { CtaBand } from "@/components/sections/cta-band";
 import { ProjectFeature } from "@/components/work/project-feature";
 import { ProductCard } from "@/components/products/product-card";
+import { ProductSpotlight } from "@/components/products/product-spotlight";
 import { Button } from "@/components/ui/button";
 import { Container, Section, SectionHeader } from "@/components/ui/layout";
 import { Reveal } from "@/components/ui/reveal";
@@ -64,12 +65,21 @@ export default async function HomePage() {
               All products
             </Button>
           </div>
-          <div className="mt-14 grid gap-4 md:grid-cols-2">
-            {products.map((p, i) => (
-              <Reveal key={p.slug} delay={(i % 2) * 80}>
-                <ProductCard product={p} />
+          {products
+            .filter((p) => p.spotlight)
+            .map((p) => (
+              <Reveal key={p.slug} className="mt-14">
+                <ProductSpotlight product={p} />
               </Reveal>
             ))}
+          <div className="mt-4 grid gap-4 md:grid-cols-2">
+            {products
+              .filter((p) => !p.spotlight)
+              .map((p, i) => (
+                <Reveal key={p.slug} delay={(i % 2) * 80}>
+                  <ProductCard product={p} />
+                </Reveal>
+              ))}
           </div>
         </Container>
       </Section>

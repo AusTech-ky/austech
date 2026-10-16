@@ -8,6 +8,7 @@ import { PageHeader } from "@/components/sections/page-header";
 import { CtaBand } from "@/components/sections/cta-band";
 import { Stage } from "@/components/sections/stage";
 import { PricingBlock } from "@/components/products/pricing";
+import { ProductSpotlight } from "@/components/products/product-spotlight";
 import { Button, TextLink } from "@/components/ui/button";
 import { Badge, Container } from "@/components/ui/layout";
 import { Reveal } from "@/components/ui/reveal";
@@ -15,11 +16,22 @@ import { Reveal } from "@/components/ui/reveal";
 export const metadata: Metadata = {
   title: "Products",
   description:
-    "Software products from Austech: a shared WhatsApp team inbox, a fuel management platform for station networks, and property management and HR platforms coming soon.",
+    "Software products from Austech: a fuel management platform for station networks, Roster by Manage.ky for HR, and a shared WhatsApp team inbox.",
   alternates: { canonical: "/products" },
 };
 
 function ProductSection({ product, index }: { product: Product; index: number }) {
+  if (product.spotlight) {
+    return (
+      <section id={product.slug} className="scroll-mt-16 py-12 sm:py-16">
+        <Container>
+          <Reveal>
+            <ProductSpotlight product={product} />
+          </Reveal>
+        </Container>
+      </section>
+    );
+  }
   const a = accentClasses[product.accent];
   const soon = product.status === "coming-soon";
   const browser = product.screens.find((s) => s.frame === "browser") ?? product.screens[0];
