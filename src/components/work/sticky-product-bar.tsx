@@ -15,11 +15,13 @@ export function StickyProductBar({
   slug,
   tagline,
   international,
+  website,
 }: {
   name: string;
   slug: string;
   tagline: string;
   international?: boolean;
+  website?: { label: string; href: string };
 }) {
   const [pastTop, setPastTop] = useState(false);
   const [covered, setCovered] = useState(false);
@@ -58,21 +60,25 @@ export function StickyProductBar({
         show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0",
       )}
     >
-      <div className="mx-auto flex max-w-[1100px] flex-col gap-4 rounded-2xl bg-white/90 p-4 shadow-lift ring-1 ring-line backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between sm:px-6">
+      {/* One slim row on phones, so it never covers much of the page. */}
+      <div className="mx-auto flex max-w-[1100px] items-center justify-between gap-3 rounded-2xl bg-white/90 py-2.5 pl-4 pr-2.5 shadow-lift ring-1 ring-line backdrop-blur-xl sm:gap-4 sm:p-4 sm:px-6">
         <div className="min-w-0">
-          <p className="text-[0.95rem] font-semibold text-ink">
-            {name} is available as a product
+          <p className="text-[0.88rem] font-semibold leading-snug text-ink sm:text-[0.95rem]">
+            <span className="sm:hidden">{website ? `Now part of ${website.label}` : name}</span>
+            <span className="hidden sm:inline">
+              {website ? `${name} is now part of ${website.label}` : `${name} is available as a product`}
+            </span>
             {international && (
-              <span className="font-normal text-muted"> (including for companies outside the Cayman Islands)</span>
+              <span className="hidden font-normal text-muted sm:inline"> (including for companies outside the Cayman Islands)</span>
             )}
           </p>
           <p className="mt-0.5 hidden text-[0.85rem] text-muted sm:block">{tagline}</p>
         </div>
         <div className="flex shrink-0 gap-2.5">
-          <Button href={`/contact?project=${slug}`} arrow>
-            Request a demo
+          <Button href={website?.href ?? `/contact?project=${slug}`} arrow className="max-sm:px-4 max-sm:text-[0.85rem]">
+            {website ? `Visit ${website.label}` : "Request a demo"}
           </Button>
-          <Button href={`/products#${slug}`} variant="secondary" className="hidden sm:inline-flex">
+          <Button href={`/products#${slug}`} variant="secondary" className="max-sm:hidden!">
             See {name}
           </Button>
         </div>

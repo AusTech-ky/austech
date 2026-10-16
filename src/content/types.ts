@@ -96,6 +96,12 @@ export type Project = {
     features: { title: string; description: string }[];
   };
   gallery: MockupView[];
+  /** Headline at the top of the case study: `title` in white, then `accent` in the product's colour. */
+  headline?: { title: string; accent: string };
+  /** Four short facts under the headline, for readers who only skim. */
+  glance?: { title: string; detail: string }[];
+  /** Follows one piece of work through the system, a screen per step. Shown in place of the gallery. */
+  story?: CaseStory;
   impact?: {
     intro: string;
     items: ImpactItem[];
@@ -103,6 +109,13 @@ export type Project = {
   /** Related product on /products, if this work became one. */
   productSlug?: string;
   seo?: { title?: string; description?: string };
+};
+
+export type CaseStory = {
+  /** e.g. "Follow one fill". */
+  title: string;
+  intro: string;
+  steps: { label: string; title: string; text: string; screen: MockupView }[];
 };
 
 // ─── Products ────────────────────────────────────────────────────
@@ -153,6 +166,26 @@ export type Product = {
   caseStudySlug?: string;
   /** Also sold to companies outside the Cayman Islands. */
   international?: boolean;
+  /** Badge text in place of "Available" / "Coming soon", e.g. "New". */
+  badge?: string;
+  /** The product's own site. Cards and buttons go there instead of the products page. */
+  website?: { label: string; href: string };
+  /** Kept for later: not shown anywhere on the site. */
+  hidden?: boolean;
+  /** A big panel near the top of the home page. Panels show in product order. */
+  spotlight?: Spotlight;
+};
+
+export type Spotlight = {
+  /** Headline: `title` in white, then `accent` in the product's colour. */
+  title: string;
+  accent: string;
+  lead: string;
+  points: string[];
+  /** Small cards floating over the screens, like the app's own notices. */
+  notes: { title: string; detail: string; icon: "check" | "mail" }[];
+  /** A browser screen and an optional phone; defaults to the product's screens. */
+  screens?: MockupView[];
 };
 
 // ─── Services ────────────────────────────────────────────────────

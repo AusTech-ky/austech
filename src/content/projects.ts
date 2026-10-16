@@ -27,6 +27,73 @@ export const projects: Project[] = [
       address: "app.fuelup.ky/app/admin",
       frame: "browser",
     },
+    headline: { title: "Fuel on account,", accent: "from the pump to the statement." },
+    glance: [
+      { title: "5 portals", detail: "On one ledger" },
+      { title: "Offline", detail: "Keeps working at the pump" },
+      { title: "On approval", detail: "Invoices go out by themselves" },
+      { title: "QuickBooks", detail: "Invoices out, payments back" },
+    ],
+    story: {
+      title: "Follow one fill",
+      intro: "From the pump to the customer's phone, one fill goes through the whole system.",
+      steps: [
+        {
+          label: "At the till",
+          title: "The fill waits for the cashier",
+          text: "The attendant records the fill at the pump. It lands on the cashier's screen, one tile per pump, ready to approve.",
+          screen: {
+            screenshot: "/work/fuel-up/cashier-desktop.jpg",
+            alt: "Fuel Up cashier desk with four fills pending approval by pump number and a list of recent transactions",
+            address: "app.fuelup.ky/app/cashier",
+            frame: "browser",
+          },
+        },
+        {
+          label: "On approval",
+          title: "The invoice writes itself",
+          text: "Approved fills become invoices on their own, each with a PDF copy. Statements go out to every account in one send.",
+          screen: {
+            screenshot: "/work/fuel-up/invoices-desktop.jpg",
+            alt: "Fuel Up customer invoices with the account balance, unpaid total and a list of issued and paid invoices",
+            address: "app.fuelup.ky/app/customer/invoices",
+            frame: "browser",
+          },
+        },
+        {
+          label: "In the office",
+          title: "Every station, live",
+          text: "The operator sees sales, revenue by fuel grade and who owes what across every station, as it happens.",
+          screen: {
+            screenshot: "/work/fuel-up/operator-desktop.jpg",
+            alt: "Fuel Up operator console with today's sales, month-to-date revenue, outstanding balances and a 30-day revenue chart",
+            address: "app.fuelup.ky/app/admin",
+            frame: "browser",
+          },
+        },
+        {
+          label: "The customer",
+          title: "They see it all themselves",
+          text: "Balance, credit left, fills and invoices are online, so there's no need to call the office.",
+          screen: {
+            screenshot: "/work/fuel-up/customer-desktop.jpg",
+            alt: "Fuel Up customer portal showing account balance, available credit, active vehicles and drivers, and a six-month activity chart",
+            address: "app.fuelup.ky/app/customer",
+            frame: "browser",
+          },
+        },
+        {
+          label: "On their phone",
+          title: "Any phone, no app",
+          text: "Customers check their balance and available credit from any phone, with nothing to download.",
+          screen: {
+            screenshot: "/work/fuel-up/customer-mobile.jpg",
+            alt: "Fuel Up customer portal on a phone showing account balance and available credit",
+            frame: "phone",
+          },
+        },
+      ],
+    },
     challenge: {
       intro:
         "Fleet and business customers fuel on credit, which meant paper slips at the pump, manual keying at the till and invoices pieced together at month-end. Customers only found out what they owed when the statement arrived.",
@@ -121,6 +188,13 @@ export const projects: Project[] = [
       alt: "Warehouse portal on an iPad: a product's stock on island, incoming and committed, and the warehouse bays it sits in",
       frame: "tablet",
     },
+    headline: { title: "Stock that sells", accent: "before it lands." },
+    glance: [
+      { title: "Preorders", detail: "Sell stock that's still at sea" },
+      { title: "One count", detail: "On island, incoming and promised, side by side" },
+      { title: "iPad receiving", detail: "Deliveries checked against the order" },
+      { title: "Shopify", detail: "Stock kept in step with the store" },
+    ],
     challenge: {
       intro:
         "Almost everything a Cayman retailer sells is shipped in. By the time an order has crossed the sea and cleared customs, a month or more can have passed, and until it lands that stock is invisible to customers. For a store selling furniture and homeware, that's a month of sales waiting on a boat.",
@@ -226,6 +300,13 @@ export const projects: Project[] = [
       address: "Charter website",
       frame: "browser",
     },
+    headline: { title: "The boat up front,", accent: "booking built in." },
+    glance: [
+      { title: "Drone video", detail: "Leads every page" },
+      { title: "Live sandbar", detail: "Conditions at Stingray City" },
+      { title: "Book online", detail: "Peek checkout on the site" },
+      { title: "Owner-edited", detail: "Pages changed without us" },
+    ],
     challenge: {
       intro:
         "The client runs a Leopard 50 sailing catamaran, as a private charter: one group at a time, with the day shaped around them. They needed a website that sold that feeling, not another list of boat tours, and that they could keep up to date themselves.",
@@ -316,6 +397,13 @@ export const projects: Project[] = [
     featured: true,
     order: 2,
     hero: { product: "swiftbooks", view: "review", frame: "browser" },
+    headline: { title: "Bank statements", accent: "that sort themselves." },
+    glance: [
+      { title: "Seconds", detail: "To categorise a statement" },
+      { title: "Per vehicle", detail: "Every cost on the right car" },
+      { title: "Matched", detail: "Payments applied to invoices" },
+      { title: "Zoho", detail: "Expenses and payments synced" },
+    ],
     challenge: {
       intro:
         "Banks in the Cayman Islands don't connect to the accounting platforms most businesses rely on, so nothing flows across on its own. Every line on Swift's statements had to be keyed in by hand.",
@@ -379,6 +467,172 @@ export const projects: Project[] = [
         { title: "Payments recorded once", description: "Customer payments are matched and applied straight from the bank statement, with nothing typed twice." },
       ],
     },
+  },
+  {
+    slug: "roster",
+    name: productNames.people,
+    client: "Austech product", // not shown; the screens use a made-up company and staff
+    tagline:
+      "Payroll and HR for teams paid on commission: sales reports in, commission and tips worked out, payslips out. Now Roster on manage.ky.",
+    summary:
+      "A payroll and HR app for businesses that pay on salary, commission and tips. Sales reports go in and every person's commission comes out, by service, product or amount sold, with your own rules for discounts. Payslips, leave and bank payments are done in the same place. It's now Roster, part of manage.ky.",
+    sector: "HR & payroll",
+    services: ["business-apps", "automation", "integrations"],
+    platforms: ["Web app", "Employee app", "Part of manage.ky"],
+    accent: "people",
+    status: "live",
+    featured: false,
+    order: 3,
+    hero: {
+      screenshot: "/work/roster/pay-run-desktop.jpg",
+      alt: "Roster pay run for October with gross pay, deductions, net pay and employer cost, and a line for each person's pay",
+      address: "manage.ky/payroll",
+      frame: "browser",
+    },
+    headline: { title: "Payroll,", accent: "worked out for you." },
+    glance: [
+      { title: "Any pay", detail: "Salary, hourly, commission and tips" },
+      { title: "Sales in", detail: "Commission worked out from the reports" },
+      { title: "Leave", detail: "Balances, lieu days and a team calendar" },
+      { title: "Any phone", detail: "Staff see pay, shifts and leave" },
+    ],
+    story: {
+      title: "Follow one pay run",
+      intro: "From the commission rules to a payslip on someone's phone.",
+      steps: [
+        {
+          label: "The rules",
+          title: "Put the commission rules in once",
+          text: "Rates for services and products, a step up after a sales amount, day rates and how discounts count.",
+          screen: {
+            screenshot: "/work/roster/commission-plan-desktop.jpg",
+            alt: "A commission plan: service commission at 15% rising to 18% after KYD 6,000, with day rate and discount options, and the people on the plan",
+            address: "manage.ky/hr/policies",
+            frame: "browser",
+          },
+        },
+        {
+          label: "The pay run",
+          title: "Everyone's pay, worked out",
+          text: "Drop in the sales reports. Each person's commission is worked out, with gross, deductions and take-home pay.",
+          screen: {
+            screenshot: "/work/roster/pay-run-desktop.jpg",
+            alt: "Roster pay run for October with gross pay, deductions, net pay and employer cost, and a line for each person's pay",
+            address: "manage.ky/payroll",
+            frame: "browser",
+          },
+        },
+        {
+          label: "The payslip",
+          title: "The working is on the payslip",
+          text: "What was sold and the rate it earned, next to salary, tips, pension and health insurance.",
+          screen: {
+            screenshot: "/work/roster/payslip-desktop.jpg",
+            alt: "A payslip in the pay run with salary, service and retail commission, tips, pension and health insurance",
+            address: "manage.ky/payroll",
+            frame: "browser",
+          },
+        },
+        {
+          label: "Their phone",
+          title: "Staff see it themselves",
+          text: "Their last pay, next shift and leave, from any phone.",
+          screen: {
+            screenshot: "/work/roster/portal-mobile.jpg",
+            alt: "Employee app on a phone with the next shift, leave balances and last pay",
+            frame: "phone",
+          },
+        },
+      ],
+    },
+    challenge: {
+      intro:
+        "Staff are paid a salary plus commission on what they sell, with tips on top. Every month the figures had to come out of the sales system's reports and through a spreadsheet before anyone could be paid.",
+      points: [
+        "Commission was worked out by hand from long sales reports, person by person",
+        "Discounts and free services needed their own rules for what still counted",
+        "Different rates for services, products and bigger sales months were hard to apply the same way every time",
+        "Payslips, pension, health insurance and bank transfers were each a separate job",
+      ],
+    },
+    approach: {
+      intro:
+        "We sat with the people running payroll, followed a real pay run from the sales reports to the bank, and built each step into the app.",
+      steps: [
+        { title: "Start from the sales reports", description: "The reports staff already download are dropped in, and every service and product sold lands on the person who did it." },
+        { title: "Put the commission rules in once", description: "Rates for services and products, steps that rise with sales, special day rates and discount rules are set once and used every run." },
+        { title: "Show the working", description: "Every payslip shows what was sold and the rate it earned, and staff see it on their phone, so fewer questions reach the office." },
+      ],
+    },
+    solution: {
+      intro:
+        "One app for the whole pay cycle: sales and hours in, payslips checked and approved, then mailed out and paid.",
+      features: [
+        { title: "Commission from sales reports", description: "Drop in the sales reports and each person's commission is worked out, with nothing typed in." },
+        { title: "Rates your way", description: "One rate for services, another for products or particular items, and each person's own rate where it differs." },
+        { title: "Steps for bigger sales", description: "A higher rate once someone sells past an amount, on everything or only on the part above it." },
+        { title: "Day rates", description: "A different rate for work on someone's days off or on chosen days of the week." },
+        { title: "Discounts & free services", description: "Choose whether discounted work pays on the price taken or the full price, and what free services count." },
+        { title: "Tips", description: "Tips from the sales reports go onto each payslip as their own line." },
+        { title: "Payslips & bank payments", description: "Salary, hourly and commission on one payslip, emailed in one go, with a payments list for each bank." },
+        { title: "Leave & employee app", description: "Leave, lieu days and a team calendar, and an app where staff see their payslips and shifts." },
+      ],
+    },
+    gallery: [
+      {
+        screenshot: "/work/roster/payslip-desktop.jpg",
+        alt: "A payslip in the pay run with salary, service and retail commission, tips, pension and health insurance",
+        address: "manage.ky/payroll",
+        frame: "browser",
+        title: "Commission, worked out",
+        caption: "Each payslip shows what was sold and the rate it earned, next to salary, tips, pension and health insurance.",
+      },
+      {
+        screenshot: "/work/roster/commission-plan-desktop.jpg",
+        alt: "A commission plan: service commission at 15% rising to 18% after KYD 6,000, with day rate and discount options, and the people on the plan",
+        address: "manage.ky/hr/policies",
+        frame: "browser",
+        title: "Commission plans",
+        caption: "Rates for services and products, steps that rise with sales, a different rate on some days, and how discounts count.",
+      },
+      {
+        screenshot: "/work/roster/time-off-desktop.jpg",
+        alt: "Time off calendar for October with vacation, a sick day and a birthday",
+        address: "manage.ky/hr/calendar",
+        frame: "browser",
+        title: "Time off",
+        caption: "Vacation, sick days and birthdays on one calendar, with requests approved in a click.",
+      },
+      {
+        screenshot: "/work/roster/overview-desktop.jpg",
+        alt: "Roster overview with headcount, who's out this week, a month calendar and leave requests waiting for approval",
+        address: "manage.ky/hr",
+        frame: "browser",
+        title: "The week at a glance",
+        caption: "Who's out, what's waiting for approval and whose work permit is due, as soon as you sign in.",
+      },
+      {
+        screenshot: "/work/roster/portal-mobile.jpg",
+        alt: "Employee app on a phone with the next shift, leave balances and last pay",
+        frame: "phone",
+        caption: "Staff see their next shift, leave and last pay from any phone.",
+      },
+    ],
+    impact: {
+      intro:
+        "Commission pay day is a review and an approval, not a spreadsheet, and staff can see how their pay was worked out.",
+      items: [
+        { title: "Commission without the sums", description: "Sales reports go in and each person's commission comes out, worked out the same way every time." },
+        { title: "Pay people can follow", description: "Every payslip shows the sales and rates behind it, and staff can see it on their phone." },
+        { title: "Pay and time off together", description: "Leave, lieu days and pay share one record of each person, so nothing is typed twice." },
+      ],
+    },
+    seo: {
+      title: "Roster payroll and HR case study",
+      description:
+        "Payroll and HR built around commission: sales reports in, commission and tips worked out, payslips, leave and bank payments in one place. Now Roster on manage.ky.",
+    },
+    productSlug: "roster",
   },
   {
     slug: "swift-vehicle-tracking",

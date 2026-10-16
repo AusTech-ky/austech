@@ -21,7 +21,7 @@ export const products: Product[] = [
     accent: "relay",
     mockup: "relay",
     status: "coming-soon",
-    order: 2,
+    order: 3,
     features: [
       { title: "Shared inbox", description: "Every conversation on your number, in one place, for the whole team." },
       { title: "Assign & hand over", description: "Clear ownership of each chat, with context that travels with it." },
@@ -79,6 +79,29 @@ export const products: Product[] = [
     },
     caseStudySlug: "fuel-up",
     international: true,
+    spotlight: {
+      title: "Fuel on account,",
+      accent: "without the paperwork.",
+      lead: "Attendants record fills at the pump, cashiers approve them at the till, and invoices and statements go out on their own. Customers see their balance, drivers and limits online.",
+      points: ["Works offline at the pump", "Invoices and statements sent for you", "QuickBooks sync"],
+      notes: [
+        { title: "Fill approved at the till", detail: "Pump 4 · Coral Bay Construction", icon: "check" },
+        { title: "Monthly statements sent", detail: "Fuel Up · automated", icon: "mail" },
+      ],
+      screens: [
+        {
+          screenshot: "/work/fuel-up/operator-desktop.jpg",
+          alt: "Fuel Up operator console with today's sales, month-to-date revenue, outstanding balances and a 30-day revenue chart",
+          address: "app.fuelup.ky/app/admin",
+          frame: "browser",
+        },
+        {
+          screenshot: "/work/fuel-up/customer-mobile.jpg",
+          alt: "Fuel Up customer portal on a phone showing account balance and available credit",
+          frame: "phone",
+        },
+      ],
+    },
   },
   {
     slug: "property",
@@ -91,7 +114,8 @@ export const products: Product[] = [
     accent: "property",
     mockup: "property",
     status: "coming-soon",
-    order: 3,
+    order: 4,
+    hidden: true, // kept for later
     features: [
       { title: "Units & tenancies", description: "Every property, unit and lease with key dates in one place." },
       { title: "Rent tracking", description: "See what's paid, due and overdue, with automatic reminders." },
@@ -102,24 +126,51 @@ export const products: Product[] = [
     pricing: { model: "none" },
   },
   {
-    slug: "people",
+    slug: "roster",
     name: productNames.people,
-    category: "HR platform",
-    tagline: "People admin without the paperwork.",
+    category: "HR & payroll",
+    tagline: "Sales in, commission out, payslips done.",
     description:
-      "A lightweight HR platform for growing teams: employee records, leave and time off, documents and onboarding, designed around how SMBs in the region actually work.",
-    audience: "For businesses with 10–250 people.",
+      "Payroll and HR for teams paid on salary, commission and tips. Bring in your sales reports and Roster works out every person's commission with your own rules, then payslips, leave and bank payments are done in the same place.",
+    audience: "For businesses that pay their people on commission.",
     accent: "people",
     mockup: "people",
-    status: "coming-soon",
-    order: 4,
+    status: "available",
+    badge: "New",
+    order: 2,
     features: [
-      { title: "Employee records", description: "One secure place for every employee's details and documents." },
-      { title: "Leave & time off", description: "Requests, approvals and balances without the email chains." },
-      { title: "Onboarding", description: "Checklists that get new starters productive faster." },
-      { title: "Work permit tracking", description: "Key expiry dates surfaced well before they're due." },
+      { title: "Commission from sales reports", description: "Bring in the sales system's reports and every person's commission is worked out." },
+      { title: "Rates your way", description: "By service, product or amount sold, with steps that rise in bigger months." },
+      { title: "Discounts & free services", description: "Your own rules for what still earns commission." },
+      { title: "Tips", description: "Added to the right people and shown on their payslips." },
+      { title: "Payslips & bank payments", description: "Checked, approved, mailed out and paid in one run." },
+      { title: "Leave & employee app", description: "Staff see their pay, shifts and leave on their phone." },
     ],
-    screens: [{ product: "people", view: "overview", frame: "browser" }],
+    screens: [
+      {
+        screenshot: "/work/roster/pay-run-desktop.jpg",
+        alt: "Roster pay run listing each person's salary, commission, tips and net pay",
+        address: "manage.ky/payroll",
+        frame: "browser",
+      },
+      {
+        screenshot: "/work/roster/portal-mobile.jpg",
+        alt: "Roster employee app on a phone showing the next shift, leave left and last pay",
+        frame: "phone",
+      },
+    ],
     pricing: { model: "none" },
+    caseStudySlug: "roster",
+    website: { label: "manage.ky", href: "https://manage.ky" },
+    spotlight: {
+      title: "Payroll,",
+      accent: "worked out for you.",
+      lead: "Salary, hourly, commission and tips in one pay run, worked out with your rules. Payslips, leave and bank payments are done in the same place.",
+      points: ["Salary, hourly or commission", "Leave and lieu days", "Payslips on every phone"],
+      notes: [
+        { title: "Commission worked out", detail: "8 people · from October's sales", icon: "check" },
+        { title: "Payslips mailed out", detail: "Roster · just now", icon: "mail" },
+      ],
+    },
   },
 ];

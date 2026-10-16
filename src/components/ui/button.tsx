@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 type Variant = "primary" | "secondary" | "ghost";
@@ -30,15 +30,24 @@ type Props = {
   children: React.ReactNode;
 } & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "className" | "children">;
 
+/** Links to other sites open in a new tab, with an up-right arrow. */
+export const isExternal = (href: string) => /^https?:\/\//.test(href);
+export const externalProps = { target: "_blank", rel: "noopener" } as const;
+
 export function Button({ href, variant = "primary", size = "md", arrow, className, children, ...rest }: Props) {
   const classes = cn(base, variants[variant], sizes[size], className);
+  const external = !!href && isExternal(href);
+  const Arrow = external ? ArrowUpRight : ArrowRight;
   const content = (
     <>
       {children}
       {arrow && (
-        <ArrowRight
+        <Arrow
           aria-hidden
-          className="size-4 -mr-0.5 transition-transform duration-300 ease-[var(--ease-out-soft)] group-hover:translate-x-0.5"
+          className={cn(
+            "size-4 -mr-0.5 transition-transform duration-300 ease-[var(--ease-out-soft)]",
+            external ? "group-hover:-translate-y-0.5 group-hover:translate-x-0.5" : "group-hover:translate-x-0.5",
+          )}
           strokeWidth={2}
         />
       )}
@@ -47,7 +56,7 @@ export function Button({ href, variant = "primary", size = "md", arrow, classNam
 
   if (href) {
     return (
-      <Link href={href} className={classes}>
+      <Link href={href} className={classes} {...(external ? externalProps : {})}>
         {content}
       </Link>
     );

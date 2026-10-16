@@ -4,12 +4,13 @@ import { getProducts, getServices } from "@/lib/content";
 import { Container } from "@/components/ui/layout";
 import { Logo } from "./logo";
 import { CookieSettingsLink } from "./cookie-banner";
+import { externalProps, isExternal } from "@/components/ui/button";
 
 export async function Footer() {
   const [services, products] = await Promise.all([getServices(), getProducts()]);
   const year = new Date().getFullYear();
 
-  const columns: { title: string; links: { label: string; href: string; soon?: boolean }[] }[] = [
+  const columns: { title: string; links: { label: string; href: string; badge?: string }[] }[] = [
     {
       title: "Services",
       links: services.map((s) => ({ label: s.title, href: `/services#${s.key}` })),
@@ -18,8 +19,8 @@ export async function Footer() {
       title: "Products",
       links: products.map((p) => ({
         label: p.name,
-        soon: p.status === "coming-soon",
-        href: `/products#${p.slug}`,
+        badge: p.badge ?? (p.status === "coming-soon" ? "Soon" : undefined),
+        href: p.website?.href ?? `/products#${p.slug}`,
       })),
     },
     {
@@ -59,10 +60,14 @@ export async function Footer() {
                 <ul className="mt-4 space-y-2.5">
                   {col.links.map((l) => (
                     <li key={l.href}>
-                      <Link href={l.href} className="inline-flex items-center gap-2 text-[0.9rem] text-ink-2 transition-colors hover:text-ink">
+                      <Link
+                        href={l.href}
+                        {...(isExternal(l.href) ? externalProps : {})}
+                        className="inline-flex items-center gap-2 text-[0.9rem] text-ink-2 transition-colors hover:text-ink"
+                      >
                         {l.label}
-                        {l.soon && (
-                          <span className="rounded-full bg-accent-soft px-1.5 py-px text-[0.65rem] font-medium text-navy">Soon</span>
+                        {l.badge && (
+                          <span className="rounded-full bg-accent-soft px-1.5 py-px text-[0.65rem] font-medium text-navy">{l.badge}</span>
                         )}
                       </Link>
                     </li>

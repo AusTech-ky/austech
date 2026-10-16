@@ -43,12 +43,13 @@ export async function getNextProject(slug: string) {
   return all[(i + 1) % all.length];
 }
 
+/** Hidden products are kept in the content for later but never shown. */
 export async function getProducts() {
-  return [...products].sort(byOrder);
+  return products.filter((p) => !p.hidden).sort(byOrder);
 }
 
 export async function getProduct(slug: string) {
-  return products.find((p) => p.slug === slug) ?? null;
+  return products.find((p) => p.slug === slug && !p.hidden) ?? null;
 }
 
 export async function getServices() {

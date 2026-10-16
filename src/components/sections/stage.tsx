@@ -2,7 +2,7 @@ import type { Accent, MockupView } from "@/content/types";
 import { Mockup } from "@/components/mockups";
 import { cn } from "@/lib/cn";
 
-const tints: Record<Accent, string> = {
+export const stageTints: Record<Accent, string> = {
   fuel: "from-[#fdf1e2] via-[#fbf6ef] to-[#f7f6f3]",
   swift: "from-[#e6eefd] via-[#f1f5fc] to-[#f6f6f4]",
   relay: "from-[#e3f4ec] via-[#eff7f3] to-[#f6f6f4]",
@@ -33,7 +33,7 @@ export function Stage({
     <div
       className={cn(
         "relative overflow-hidden rounded-[1.25rem] bg-gradient-to-br ring-1 ring-inset ring-ink/[0.04] sm:rounded-[1.75rem]",
-        tints[accent],
+        stageTints[accent],
         compact ? "p-4 sm:p-6" : "p-4 pb-0 sm:p-8 sm:pb-0 lg:p-10 lg:pb-0",
         className,
       )}

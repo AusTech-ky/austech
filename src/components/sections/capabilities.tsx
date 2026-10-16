@@ -1,6 +1,6 @@
-import { ArrowRight, Braces, Globe, LayoutDashboard, Plug, Workflow } from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUpRight, Braces, Check, CreditCard, FileSpreadsheet, Globe, LayoutDashboard, Plug, Workflow } from "lucide-react";
 import Link from "next/link";
-import type { Service } from "@/content/types";
+import type { Service, ServiceKey } from "@/content/types";
 import { Container, Section, SectionHeader } from "@/components/ui/layout";
 import { Reveal } from "@/components/ui/reveal";
 import { ClientLogos } from "./client-logos";
@@ -14,114 +14,207 @@ export const serviceIcons = {
   plug: Plug,
 } as const;
 
-/* Small, quiet illustrations: each hints at the thing, not a stock icon. */
+/*
+ * A real piece of something we built for each service, drawn small in that
+ * client's own colours (the same idea as the cards on manage.ky). Figures
+ * are the demo data shown in each case study's screenshots.
+ */
 
-function AppGlyph() {
+const card = "rounded-xl bg-white shadow-[0_10px_26px_-16px_var(--pic-shadow)]";
+
+/** Fuel Up: the office's outstanding balance, and a fill waiting at the till. */
+function PicFuelUp() {
   return (
-    <div className="grid grid-cols-[64px_1fr] gap-3 rounded-xl bg-white p-3 shadow-soft ring-1 ring-line">
-      <div className="space-y-1.5">
-        <div className="h-2 w-10 rounded-full bg-ink/80" />
-        {[0, 1, 2, 3].map((i) => (
-          <div key={i} className={cn("h-2 rounded-full", i === 0 ? "w-12 bg-accent/70" : "w-9 bg-line")} />
-        ))}
+    <div className="grid w-[min(360px,100%)] gap-2.5 text-left">
+      <div className={cn(card, "flex items-center gap-3 p-3.5")}>
+        <span className="grid size-9 shrink-0 place-items-center rounded-lg bg-[#fdecec] text-[#dc2626]">
+          <CreditCard className="size-4" />
+        </span>
+        <div>
+          <p className="text-[9.5px] font-medium tracking-[0.12em] text-[#6b7280]">OUTSTANDING (KYD)</p>
+          <p className="nums text-[20px] font-semibold leading-tight tracking-[-0.02em] text-[#111827]">$26,153.72</p>
+          <p className="text-[11px] text-[#6b7280]">6 unpaid · 1 overdue</p>
+        </div>
       </div>
-      <div className="space-y-2">
-        <div className="grid grid-cols-3 gap-1.5">
-          {["62%", "1,204", "18"].map((v) => (
-            <div key={v} className="rounded-md bg-canvas px-1.5 py-1">
-              <div className="h-1 w-6 rounded-full bg-line-strong" />
-              <p className="nums mt-1 text-[10px] font-semibold text-ink">{v}</p>
+      <div className={cn(card, "flex items-center gap-3 p-3")}>
+        <span className="grid w-12 shrink-0 justify-items-center rounded-lg bg-[#fbefc3] py-1.5 text-[#1e3a8a]">
+          <span className="text-[8px] font-semibold tracking-[0.14em]">PUMP</span>
+          <span className="text-[19px] font-bold leading-none">4</span>
+          <span className="mt-0.5 text-[7.5px] font-semibold tracking-[0.12em] text-[#6b7280]">SELF</span>
+        </span>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center justify-between gap-2">
+            <b className="text-[13px] font-semibold text-[#111827]">C151589</b>
+            <span className="rounded-full bg-[#eef0ff] px-1.5 py-px text-[8.5px] font-semibold tracking-[0.1em] text-[#4338ca]">PENDING</span>
+          </div>
+          <p className="text-[11px] text-[#6b7280]">Sunrise Taxi Co.</p>
+          <span className="mt-1.5 inline-flex items-center rounded-full bg-[#e8173f] px-2.5 py-1 text-[10.5px] font-medium text-white">
+            Approve fill-up
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** The furniture store: one product, on island, on its way and already sold, and the bays it sits in. */
+function PicStock() {
+  const counts: [string, string, boolean?][] = [
+    ["6", "On island"],
+    ["8", "Incoming", true],
+    ["3", "Committed"],
+  ];
+  return (
+    <div className="grid w-[min(380px,100%)] gap-2.5 text-left">
+      <div className={cn(card, "p-3.5")}>
+        <div className="flex items-center gap-3">
+          <span className="size-9 shrink-0 rounded bg-gradient-to-br from-[#ece5d8] to-[#cbbca3]" />
+          <div className="min-w-0">
+            <p className="truncate text-[12.5px] font-medium text-[#1f1f1f]">Woven Rattan Lounge Chair, Natural</p>
+            <p className="text-[10px] tracking-[0.1em] text-[#8a8a8a]">CL-2041-NAT</p>
+          </div>
+        </div>
+        <div className="mt-3 grid grid-cols-3 gap-1.5">
+          {counts.map(([n, l, hot]) => (
+            <div key={l} className={cn("rounded-lg px-2.5 py-2", hot ? "bg-[#f1e8d8]" : "bg-[#f6f5f2]")}>
+              <p className="nums text-[19px] font-semibold leading-none text-[#1f1f1f]">{n}</p>
+              <p className="mt-1 text-[8.5px] font-medium tracking-[0.12em] text-[#7a7a7a]">{l.toUpperCase()}</p>
             </div>
           ))}
         </div>
-        <svg viewBox="0 0 160 40" className="h-10 w-full">
-          <path d="M0 32 C20 30,30 18,50 20 S80 30,100 16 S140 8,160 6" fill="none" stroke="var(--color-accent)" strokeWidth="2" strokeLinecap="round" />
-          <path d="M0 32 C20 30,30 18,50 20 S80 30,100 16 S140 8,160 6 L160 40 L0 40Z" fill="var(--color-accent)" opacity="0.07" />
-        </svg>
       </div>
-    </div>
-  );
-}
-
-function FlowGlyph() {
-  const steps = ["New booking", "Invoice created", "Confirmation sent"];
-  return (
-    <div className="flex flex-col gap-1.5">
-      {steps.map((s, i) => (
-        <div key={s} className="flex items-center gap-2">
-          <span
-            className={cn(
-              "flex h-7 items-center gap-2 rounded-lg bg-white px-2.5 text-[11px] font-medium text-ink shadow-soft ring-1 ring-line",
-              i === 1 && "ml-5",
-              i === 2 && "ml-10",
-            )}
-          >
-            <span className={cn("size-1.5 rounded-full", i === 2 ? "bg-positive" : "bg-accent")} />
-            {s}
+      <div className="flex flex-wrap gap-1.5">
+        {[
+          ["RS 17A", "4"],
+          ["RS RUGS", "2"],
+        ].map(([bay, n]) => (
+          <span key={bay} className="rounded-full bg-white px-2.5 py-1 text-[10.5px] text-[#4a4a4a] ring-1 ring-[#e6e1d8]">
+            <b className="font-semibold text-[#1f1f1f]">{bay}</b> · {n} in this bay
           </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/** The charter website: live sandbar conditions over the sea, and the way to book. */
+function PicCharter() {
+  const conditions: [string, string][] = [
+    ["WATER", "84°F"],
+    ["WEATHER", "Sunny"],
+    ["RAIN", "10%"],
+    ["AIR", "82°F"],
+  ];
+  return (
+    <div className="w-[min(320px,100%)] overflow-hidden rounded-xl bg-[radial-gradient(ellipse_90%_70%_at_70%_0%,#0f5b5a,transparent_70%),linear-gradient(180deg,#0b3a44,#071a2c)] p-4 text-left text-white shadow-[0_18px_36px_-18px_rgb(4_40_50/0.7)]">
+      <div className="grid grid-cols-4 gap-1 text-center">
+        {conditions.map(([k, v]) => (
+          <div key={k}>
+            <p className="text-[7.5px] font-semibold tracking-[0.14em] text-white/60">{k}</p>
+            <p className="mt-0.5 font-serif text-[13px]">{v}</p>
+          </div>
+        ))}
+      </div>
+      <p className="mt-5 font-serif text-[21px] leading-[1.1] tracking-[-0.01em]">
+        The island on <i className="text-[#b9cfe0]">your</i> schedule.
+      </p>
+      <span className="mt-4 inline-flex items-center gap-2 bg-white px-3 py-1.5 text-[9.5px] font-semibold tracking-[0.16em] text-[#0b1b2b]">
+        BOOK NOW <ArrowUpRight className="size-3" />
+      </span>
+    </div>
+  );
+}
+
+/** Swift: bank lines arriving already sorted, each with its account, car and how sure the AI is. */
+function PicBank() {
+  const rows = [
+    { memo: "POS 2231 SAMPLE AUTO PARTS", account: "Repairs & maintenance", car: "DEMO-03", conf: "91%" },
+    { memo: "POS EXAMPLE FUELS 0911", account: "Fuel", car: "DEMO-06", conf: "93%" },
+  ];
+  return (
+    <div className="grid w-[min(340px,100%)] gap-2 text-left">
+      {rows.map((r) => (
+        <div key={r.memo} className={cn(card, "px-3.5 py-3")}>
+          <p className="font-mono text-[10px] text-[#6b7280]">{r.memo}</p>
+          <div className="mt-1.5 flex items-center gap-1.5">
+            <b className="truncate text-[12.5px] font-semibold text-[#0f172a]">{r.account}</b>
+            <span className="shrink-0 rounded-md bg-[#eef2ff] px-1.5 py-px font-mono text-[9.5px] text-[#1d4ed8]">{r.car}</span>
+            <span className="ml-auto shrink-0 rounded-full bg-[#e8f6ec] px-1.5 py-px text-[10px] font-medium text-[#15803d]">{r.conf}</span>
+          </div>
         </div>
       ))}
+      <span className="inline-flex items-center gap-1.5 justify-self-end rounded-lg bg-[#2563eb] px-3 py-1.5 text-[11px] font-medium text-white shadow-[0_8px_18px_-10px_rgb(37_99_235/0.8)]">
+        <Check className="size-3" strokeWidth={2.5} /> Confirm 29 high-confidence
+      </span>
     </div>
   );
 }
 
-function PlugGlyph() {
+/** Roster on manage.ky: a sales report dropped in, and each person's commission out. */
+function PicSales() {
+  const people: [string, string][] = [
+    ["Maria Ebanks", "KYD 1,264.00"],
+    ["Kerry-Ann Bodden", "KYD 842.50"],
+    ["Devon Scott", "KYD 315.75"],
+  ];
   return (
-    <div className="flex flex-wrap gap-1.5">
-      {["Payments", "Accounting", "WhatsApp", "Telematics", "Email", "Calendar"].map((s) => (
-        <span key={s} className="rounded-md bg-white px-2 py-1 text-[11px] text-ink-2 ring-1 ring-line">
-          {s}
-        </span>
-      ))}
-    </div>
-  );
-}
-
-function SiteGlyph() {
-  return (
-    <div className="rounded-xl bg-white p-3 shadow-soft ring-1 ring-line">
-      <div className="flex items-center justify-between">
-        <div className="h-1.5 w-8 rounded-full bg-ink/80" />
-        <div className="flex gap-1">
-          {[0, 1, 2].map((i) => (
-            <div key={i} className="h-1 w-4 rounded-full bg-line-strong" />
-          ))}
+    <div className="grid w-[min(290px,100%)] gap-2 text-left">
+      <div className="flex items-center gap-2.5 rounded-xl border-[1.5px] border-dashed border-[#eab08c] bg-white/70 px-3 py-2.5">
+        <FileSpreadsheet className="size-5 shrink-0 text-[#16a34a]" />
+        <div>
+          <p className="text-[12.5px] font-semibold text-[#0a0a0a]">sales-october.csv</p>
+          <p className="text-[10.5px] text-[#737373]">Dropped in</p>
         </div>
       </div>
-      <div className="mt-3 h-2.5 w-3/4 rounded-full bg-ink/80" />
-      <div className="mt-1.5 h-2.5 w-1/2 rounded-full bg-ink/80" />
-      <div className="mt-2.5 h-1.5 w-2/3 rounded-full bg-line" />
-      <div className="mt-3 h-4 w-14 rounded-full bg-accent/80" />
+      <ArrowDown className="mx-auto size-4 text-[#e2580b]" />
+      {people.map(([n, v]) => (
+        <div key={n} className={cn(card, "flex items-center justify-between gap-3 rounded-[10px] px-3 py-1.5 text-[12px] text-[#737373]")}>
+          <b className="font-semibold text-[#0a0a0a]">{n}</b>
+          <span className="nums">{v}</span>
+        </div>
+      ))}
     </div>
   );
 }
 
-function CodeGlyph() {
-  return (
-    <div className="rounded-xl bg-white p-3 font-mono text-[10.5px] leading-[1.7] shadow-soft ring-1 ring-line">
-      <p>
-        <span className="text-accent">when</span> <span className="text-ink">order.approved</span>
-      </p>
-      <p className="pl-3 text-muted">
-        reserve<span className="text-ink">(stock)</span>
-      </p>
-      <p className="pl-3 text-muted">
-        notify<span className="text-ink">(customer)</span>
-      </p>
-      <p className="pl-3 text-muted">
-        sync<span className="text-ink">(accounts)</span>
-      </p>
-    </div>
-  );
-}
-
-const glyphs = {
-  "business-apps": AppGlyph,
-  "bespoke-software": CodeGlyph,
-  websites: SiteGlyph,
-  automation: FlowGlyph,
-  integrations: PlugGlyph,
-} as const;
+/** Each service's picture: whose work it is, their colours, and the piece itself. */
+const pics: Record<ServiceKey, { from: string; dot: string; bg: string; shadow: string; Pic: () => React.ReactElement }> = {
+  "business-apps": {
+    from: "Fuel Up",
+    dot: "bg-[#ebc546]",
+    bg: "bg-[linear-gradient(160deg,#fffaf0,#f7ebc6)]",
+    shadow: "rgb(150 110 20 / 0.45)",
+    Pic: PicFuelUp,
+  },
+  "bespoke-software": {
+    from: "Furniture store",
+    dot: "bg-[#b9a27c]",
+    bg: "bg-[linear-gradient(160deg,#fbfaf7,#ece4d6)]",
+    shadow: "rgb(110 90 50 / 0.4)",
+    Pic: PicStock,
+  },
+  websites: {
+    from: "Charter website",
+    dot: "bg-[#0f766e]",
+    bg: "bg-[linear-gradient(160deg,#f1f9f8,#d3ebe7)]",
+    shadow: "rgb(10 90 90 / 0.4)",
+    Pic: PicCharter,
+  },
+  automation: {
+    from: "Swift",
+    dot: "bg-[#2563eb]",
+    bg: "bg-[linear-gradient(160deg,#f5f8ff,#dde8fd)]",
+    shadow: "rgb(30 70 180 / 0.4)",
+    Pic: PicBank,
+  },
+  integrations: {
+    from: "Roster",
+    dot: "bg-[#e2580b]",
+    bg: "bg-[linear-gradient(160deg,#fff7f1,#fce6d9)]",
+    shadow: "rgb(160 60 10 / 0.45)",
+    Pic: PicSales,
+  },
+};
 
 export function Capabilities({ services }: { services: Service[] }) {
   return (
@@ -139,38 +232,40 @@ export function Capabilities({ services }: { services: Service[] }) {
         <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
           {services.map((s, i) => {
             const Icon = serviceIcons[s.icon];
-            const Glyph = glyphs[s.key];
-            const wide = i < 2;
+            const { from, dot, bg, shadow, Pic } = pics[s.key];
             return (
               <Reveal
                 key={s.key}
                 delay={i * 60}
-                className={cn(wide ? "lg:col-span-3" : "lg:col-span-2", i === 4 && "sm:col-span-2 lg:col-span-2")}
+                className={cn(i < 2 ? "lg:col-span-3" : "lg:col-span-2", i === 4 && "sm:col-span-2 lg:col-span-2")}
               >
                 {/* The whole card links via the heading's stretched link, so the logos can be links of their own. */}
-                <div
-                  className="group relative flex h-full flex-col rounded-card bg-canvas p-6 ring-1 ring-inset ring-transparent transition-all duration-500 ease-[var(--ease-out-soft)] hover:bg-white hover:shadow-lift hover:ring-line sm:p-7"
-                >
-                  <div className={cn("flex-1", wide ? "lg:grid lg:grid-cols-[1fr_minmax(0,240px)] lg:gap-8" : "")}>
-                    <div>
-                      <div className="flex items-center gap-3">
-                        <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-accent-soft text-navy ring-1 ring-inset ring-navy/10 transition-colors group-hover:bg-navy group-hover:text-white">
-                          <Icon className="size-[18px]" strokeWidth={1.8} />
-                        </span>
-                        <h3 className="text-h3 font-semibold text-ink">
-                          <Link href={`/services#${s.key}`} className="after:absolute after:inset-0 after:rounded-card">
-                            {s.title}
-                          </Link>
-                        </h3>
-                        <ArrowRight className="ml-auto size-4 shrink-0 -translate-x-1 text-faint opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:text-ink group-hover:opacity-100" />
-                      </div>
-                      <p className="mt-4 text-[0.95rem] leading-relaxed text-muted">{s.short}</p>
-                    </div>
-                    <div className={cn("mt-7", wide && "lg:mt-0 lg:self-end")}>
-                      <Glyph />
-                    </div>
+                <div className="group relative flex h-full flex-col rounded-[22px] bg-white p-2 pb-6 ring-1 ring-line transition-shadow duration-500 ease-[var(--ease-out-soft)] hover:shadow-lift">
+                  <div
+                    aria-hidden
+                    className={cn("pop relative grid h-[290px] place-items-center overflow-hidden rounded-[16px] px-5 pb-5 pt-11", bg)}
+                    style={{ "--pic-shadow": shadow } as React.CSSProperties}
+                  >
+                    <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/80 px-2.5 py-1 text-[0.72rem] font-medium text-ink-2 ring-1 ring-black/5">
+                      <span className={cn("size-1.5 rounded-full", dot)} />
+                      {from}
+                    </span>
+                    <Pic />
                   </div>
-                  <ClientLogos service={s.key} className="mt-6 border-t border-line pt-5" />
+
+                  <div className="px-4 pt-5 sm:px-5">
+                    <div className="flex items-center gap-2.5">
+                      <Icon className="size-[18px] shrink-0 text-navy" strokeWidth={1.8} />
+                      <h3 className="text-[1.3rem] font-semibold tracking-[-0.02em] text-ink">
+                        <Link href={`/services#${s.key}`} className="after:absolute after:inset-0 after:rounded-[22px]">
+                          {s.title}
+                        </Link>
+                      </h3>
+                      <ArrowRight className="ml-auto size-4 shrink-0 text-faint transition-all duration-300 group-hover:translate-x-0.5 group-hover:text-ink" />
+                    </div>
+                    <p className="mt-2 text-[0.95rem] leading-relaxed text-muted">{s.short}</p>
+                  </div>
+                  <ClientLogos service={s.key} className="mt-auto px-4 pt-6 sm:px-5" />
                 </div>
               </Reveal>
             );

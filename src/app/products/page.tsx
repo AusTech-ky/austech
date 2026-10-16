@@ -8,14 +8,15 @@ import { PageHeader } from "@/components/sections/page-header";
 import { CtaBand } from "@/components/sections/cta-band";
 import { Stage } from "@/components/sections/stage";
 import { PricingBlock } from "@/components/products/pricing";
+import { ProductBadge } from "@/components/products/product-card";
 import { Button, TextLink } from "@/components/ui/button";
-import { Badge, Container } from "@/components/ui/layout";
+import { Container } from "@/components/ui/layout";
 import { Reveal } from "@/components/ui/reveal";
 
 export const metadata: Metadata = {
   title: "Products",
   description:
-    "Software products from Austech: a shared WhatsApp team inbox, a fuel management platform for station networks, and property management and HR platforms coming soon.",
+    "Software products from Austech: Roster, payroll and HR for teams paid on commission (by manage.ky), a fuel management platform for station networks, and a shared WhatsApp team inbox coming soon.",
   alternates: { canonical: "/products" },
 };
 
@@ -35,9 +36,14 @@ function ProductSection({ product, index }: { product: Product; index: number })
                 <span className={cn("size-2 rounded-full", a.dot)} />
                 {product.category}
               </span>
-              {soon ? <Badge tone="soon">Coming soon</Badge> : <Badge>Available now</Badge>}
+              <ProductBadge product={product} now />
             </div>
-            <h2 className="mt-5 text-h1 font-semibold text-ink">{product.name}</h2>
+            <h2 className="mt-5 text-h1 font-semibold text-ink">
+              {product.name}
+              {product.website && (
+                <span className="ml-3 text-h3 font-normal tracking-normal text-muted">by {product.website.label}</span>
+              )}
+            </h2>
             <p className="mt-3 text-h3 font-medium text-ink-2">{product.tagline}</p>
           </Reveal>
           <Reveal delay={80} className="lg:col-span-6 lg:col-start-7 lg:pt-2">
@@ -47,7 +53,11 @@ function ProductSection({ product, index }: { product: Product; index: number })
               <p className="mt-1 text-[0.85rem] text-muted">(Available for companies outside the Cayman Islands too.)</p>
             )}
             <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
-              {soon ? (
+              {product.website ? (
+                <Button href={product.website.href} arrow>
+                  Visit {product.website.label}
+                </Button>
+              ) : soon ? (
                 <Button href={`/contact?project=${product.slug}`} arrow>
                   Join the early access list
                 </Button>
@@ -116,8 +126,14 @@ export default async function ProductsPage() {
             >
               <span className={cn("size-1.5 rounded-full", accentClasses[p.accent].dot)} />
               {p.name}
-              {p.status === "coming-soon" && (
-                <span className="rounded-full bg-accent-soft px-1.5 py-px text-[0.65rem] font-medium text-navy">Soon</span>
+              {p.badge ? (
+                <span className={cn("rounded-full px-1.5 py-px text-[0.65rem] font-medium", accentClasses[p.accent].soft, accentClasses[p.accent].text)}>
+                  {p.badge}
+                </span>
+              ) : (
+                p.status === "coming-soon" && (
+                  <span className="rounded-full bg-accent-soft px-1.5 py-px text-[0.65rem] font-medium text-navy">Soon</span>
+                )
               )}
             </Link>
           ))}

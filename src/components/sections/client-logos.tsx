@@ -9,8 +9,16 @@ const clients: Partial<Record<ServiceKey, { name: string; logo: string; width: n
     { name: "Fuel Up", logo: "/clients/fuel-up-grey.png", width: 1187, height: 331, href: "/work/fuel-up", className: "h-6" },
     { name: "Boat charter website", logo: "/clients/19-north.svg", width: 2200, height: 400, href: "/work/boat-charter-website", className: "h-7" },
   ],
+  "business-apps": [
+    { name: "Fuel Up", logo: "/clients/fuel-up-grey.png", width: 1187, height: 331, href: "/work/fuel-up", className: "h-6" },
+    { name: "manage.ky", logo: "/clients/manage-ky.svg", width: 773, height: 130, href: "/work/roster", className: "h-[1.15rem]" },
+  ],
   "bespoke-software": [
     { name: "Home furnishings retailer", logo: "/clients/ahh.png", width: 514, height: 122, href: "/work/furniture-inventory", className: "h-9", opacity: "opacity-60 hover:opacity-90" },
+    { name: "Swift Auto Rentals", logo: "/clients/swift-auto-rentals.svg", width: 4870, height: 1980, href: "/work/swift-bank-reconciliation", className: "h-8" },
+  ],
+  automation: [
+    { name: "Swift Auto Rentals", logo: "/clients/swift-auto-rentals.svg", width: 4870, height: 1980, href: "/work/swift-bank-reconciliation", className: "h-8" },
   ],
 };
 

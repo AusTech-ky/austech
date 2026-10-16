@@ -61,7 +61,8 @@ export function Badge({
   className,
 }: {
   children: React.ReactNode;
-  tone?: "neutral" | "accent" | "soon" | "placeholder";
+  /** "plain" has no colours of its own; pass them in className. */
+  tone?: "neutral" | "accent" | "soon" | "placeholder" | "plain";
   className?: string;
 }) {
   const tones = {
@@ -69,6 +70,7 @@ export function Badge({
     accent: "bg-accent-soft text-accent-strong ring-accent/15",
     soon: "bg-[#fff8eb] text-[#9a5d06] ring-[#f3dcb0]",
     placeholder: "bg-[repeating-linear-gradient(135deg,#fff7e6_0_6px,#fff1d6_6px_12px)] text-[#8a5a00] ring-[#efd49b]",
+    plain: "ring-transparent",
   };
   return (
     <span
